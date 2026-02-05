@@ -54,6 +54,14 @@ public class Login
     @FindBy(xpath = "//*[@id='__next']//*[contains(text(),'Hi')]")
     WebElement HiText;
 
+    @FindBy(xpath = "//div[contains(text(),'Login using OTP')]")
+    WebElement loginUsingOTP;
+
+    public WebElement getLoginUsingOTP()
+    {
+        return loginUsingOTP;
+    }
+
     public WebElement getHiText()
     {
         return HiText;

@@ -101,6 +101,10 @@ public class LoginStepDefinition extends BaseClass
     @Then("user clicks on {string} link")
     public void user_clicks_on_link(String string)
     {
+        if(string.equalsIgnoreCase("login Using OTP")) {
+            clickElement(login.getLoginUsingOTP());
+            Assert.assertTrue(elementIsDisplayed(login.getOtpField()));
+        }
 
     }
 
