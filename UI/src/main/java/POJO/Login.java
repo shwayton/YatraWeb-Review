@@ -33,6 +33,9 @@ public class Login
     @FindBy(xpath = "//button[text()='Login ']")
     WebElement LoginBtn;
 
+    @FindBy(xpath = "//button[text() = 'Login']")
+    WebElement LoginBtnAfterPassword;
+
     @FindBy(xpath = "//button[text()='Verify']")
     WebElement verifyBtn;
 
@@ -41,6 +44,35 @@ public class Login
 
     @FindBy(xpath = "//div[@class='style_popup__a7PrI MuiBox-root css-0']")
     WebElement loginBox;
+
+    @FindBy(id = "pass")
+    WebElement passwordField;
+
+    @FindBy(xpath = "//div[contains(text(),'Login / Signup')]")
+    WebElement Login_SignUpBtn;
+
+    @FindBy(xpath = "//*[@id='__next']//*[contains(text(),'Hi')]")
+    WebElement HiText;
+
+    public WebElement getHiText()
+    {
+        return HiText;
+    }
+
+    public WebElement getLoginBtnAfterPassword()
+    {
+        return LoginBtnAfterPassword;
+    }
+
+    public WebElement getLogin_SignUpBtn()
+    {
+        return Login_SignUpBtn;
+    }
+
+    public WebElement getPasswordField()
+    {
+        return passwordField;
+    }
 
     public WebElement getLoginBox()
     {

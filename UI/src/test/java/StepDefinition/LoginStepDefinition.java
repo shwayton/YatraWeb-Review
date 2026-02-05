@@ -5,8 +5,13 @@ import POJO.Login;
 import Utilities.BaseClass;
 import Utilities.TextConstants;
 import io.cucumber.java.en.*;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import java.time.Duration;
 
 public class LoginStepDefinition extends BaseClass
 {
@@ -14,7 +19,7 @@ public class LoginStepDefinition extends BaseClass
     Login login = new Login(driver);
 
     @Given("the user is on the yatra website")
-    public void the_user_is_on_the_yatra_website() throws InterruptedException
+    public void the_user_is_on_the_yatra_website()
     {
         openWebsite("https://www.yatra.com/");
         Assert.assertEquals(getPageTitle(), TextConstants.YATRA_TITLE);
@@ -27,24 +32,24 @@ public class LoginStepDefinition extends BaseClass
     }
 
     @When("the user enters the {string} on {string}")
-    public void the_user_enters_the_on(String phone_number, String acct_Type)
+    public void the_user_enters_the_on(String credential, String acct_Type)
     {
         if (acct_Type.equalsIgnoreCase(TextConstants.PERSONAL_ACCOUNT))
         {
             if (elementIsDisplayed(login.getGoogleLoginBtn()))
-                enterTextInField(login.getLoginPhoneNumber(), phone_number);
+                enterTextInField(login.getLoginPhoneNumber(), credential);
             else {
                 clickElement(login.getSME_Account());
-                enterTextInField(login.getLoginPhoneNumber(), phone_number);
+                enterTextInField(login.getLoginPhoneNumber(), credential);
             }
         }
         else if (acct_Type.equalsIgnoreCase(TextConstants.SME_ACCOUNT))
         {
             if (!elementIsDisplayed(login.getGoogleLoginBtn()))
-                enterTextInField(login.getLoginPhoneNumber(), phone_number);
+                enterTextInField(login.getLoginPhoneNumber(), credential);
             else {
                 clickElement(login.getSME_Account());
-                enterTextInField(login.getLoginPhoneNumber(), phone_number);
+                enterTextInField(login.getLoginPhoneNumber(), credential);
             }
 
         }
@@ -52,9 +57,10 @@ public class LoginStepDefinition extends BaseClass
     }
 
     @Then("the user enters the OTP received")
-    public void the_user_enters_the_otp_received()
+    public void the_user_enters_the_otp_received() throws InterruptedException
     {
-        enterTextInField(login.getOtpField(), "123456");
+        Thread.sleep(20000);
+        //enterTextInField(login.getOtpField(), "123456");
     }
 
     @Then("the user clicks on {string}")
@@ -64,18 +70,32 @@ public class LoginStepDefinition extends BaseClass
             clickElement(login.getLoginBtn());
         else if(string.equalsIgnoreCase("Verify"))
             clickElement(login.getVerifyBtn());
+        else if(string.equalsIgnoreCase("PasswordLogin"))
+            clickElement(login.getLoginBtnAfterPassword());
     }
 
     @Then("user enters the {string}")
     public void user_enters_the(String string)
     {
-
+        enterTextInField(login.getPasswordField(), "shwetank01");
     }
 
     @Then("the user should be logged in")
     public void the_user_should_be_logged_in()
     {
 
+        Assert.assertTrue(elementIsDisplayed(login.getHiText()));
+
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+//
+//        boolean invisible = wait.until(
+//                ExpectedConditions.invisibilityOfElementLocated(
+//                        By.xpath("//div[text()='Login / Signup']")
+//                )
+//        );
+//
+//        Assert.assertTrue(invisible,
+//                "Login / Signup should disappear after login");
     }
 
     @Then("user clicks on {string} link")

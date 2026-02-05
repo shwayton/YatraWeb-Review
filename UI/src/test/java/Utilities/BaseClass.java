@@ -18,14 +18,11 @@ public class BaseClass
     public WebDriver driver;
     public WebDriver getDriver()
     {
-        WebDriverManager.safaridriver().setup();
-        driver = new SafariDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         return driver;
-    }
 
-//    public WebDriver getDriver(String browser)
-//    {
 //        if(browser.equalsIgnoreCase("Chrome"))
 //            driver = WebDriverManager.chromedriver().getWebDriver();
 //
@@ -36,13 +33,11 @@ public class BaseClass
 //            driver = WebDriverManager.safaridriver().getWebDriver();
 //
 //        return driver;
-//    }
+   }
 
-    public void openWebsite(String url) throws InterruptedException
+    public void openWebsite(String url)
     {
-
         driver.get(url);
-
         driver.manage().window().maximize();
     }
 

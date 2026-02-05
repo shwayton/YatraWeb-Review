@@ -9,7 +9,8 @@ import io.cucumber.testng.CucumberOptions;
         glue = "StepDefinition",            // package containing step definitions
         tags = "@smoke"
 )
-public class TestRunner  extends AbstractTestNGCucumberTests
+public class
+TestRunner  extends AbstractTestNGCucumberTests
 {
 
 }
