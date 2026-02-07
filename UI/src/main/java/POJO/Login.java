@@ -1,5 +1,6 @@
 package POJO;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -48,7 +49,7 @@ public class Login
     WebElement loginBox;
 
     @FindBy(id = "pass")
-    WebElement passwordField;
+    WebElement  passwordField;
 
     @FindBy(xpath = "//div[contains(text(),'Login / Signup')]")
     WebElement Login_SignUpBtn;
@@ -98,11 +99,59 @@ public class Login
     @FindBy(xpath = "//button[@type='submit']")
     WebElement signUpBtn;
 
+    @FindBy(id ="gst")
+    WebElement gst;
+
+    @FindBy(id ="company")
+    WebElement companyName;
+
+    @FindBy(id = "address")
+    WebElement companyAddress;
+
+    @FindBy(id = "pincode")
+    WebElement pincode;
+
+    @FindBy(name = "city")
+    WebElement city;
+
+    @FindBy(name = "state")
+    WebElement state;
+
+    public WebElement getGst()
+    {
+        return gst;
+    }
+
+    public WebElement getCompanyName()
+    {
+        return companyName;
+    }
+
+    public WebElement getCompanyAddress()
+    {
+        return companyAddress;
+    }
+
+    public WebElement getPincode()
+    {
+        return pincode;
+    }
+
+    public WebElement getCity()
+    {
+        return city;
+    }
+
+    public WebElement getState()
+    {
+        return state;
+    }
+
     public WebElement getSignUpBtn()
     {
         return signUpBtn;
     }
-    
+
     public WebElement getCountryCodeField()
     {
         return countryCodeField;

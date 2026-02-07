@@ -114,29 +114,29 @@ public class LoginStepDefinition extends BaseClass
     @Then("^the user enters \"([^\"]*)\" in \"([^\"]*)\"")
     public void the_user_enters(String textToBeEntered, String field)
     {
-        if (field.equalsIgnoreCase("phone_number")) {
+        if (field.equalsIgnoreCase("phone_number"))
+        {
             String[] str = textToBeEntered.split(" ");
-
             String countryCode = str[0];
 
             clickElement(login.getCountryCodeField());
-
             enterTextInField(login.getCountryListSearchField(), countryCode.substring(1));
 
             if (login.getCountryList().getFirst().getText().trim().equalsIgnoreCase(TextConstants.NO_MATCH_FOUND))
                 System.out.println("Incorrect country code");
-
             else {
                 for (WebElement ele : login.getCountryList()) {
                     if (ele.getText().split("\\R")[1].equalsIgnoreCase(countryCode)) {
                         clickElement(ele);
+                        break;
                     }
                 }
             }
-
             enterTextInField(login.getSignUpPhoneNo(), str[1]);
-        } else if (field.equalsIgnoreCase("full_name")) {
+        }
 
+        else if (field.equalsIgnoreCase("full_name"))
+        {
             String[] str = textToBeEntered.split(" ");
 
             clickElement(login.getSignUpPronoun());
@@ -152,9 +152,27 @@ public class LoginStepDefinition extends BaseClass
             String nameToEnter = "";
             for (int i = 1; i < str.length; i++)
                 nameToEnter = nameToEnter + str[i] + " ";
-
             enterTextInField(login.getSignUpName(), nameToEnter.trim());
         }
+
+        else if (field.equalsIgnoreCase("GST_number"))
+            enterTextInField(login.getGst(), textToBeEntered);
+
+        else if (field.equalsIgnoreCase("company_name"))
+            enterTextInField(login.getCompanyName(), textToBeEntered);
+
+        else if (field.equalsIgnoreCase("company_address"))
+            enterTextInField(login.getCompanyAddress(), textToBeEntered);
+
+        else if (field.equalsIgnoreCase("pincode"))
+            enterTextInField(login.getPincode(), textToBeEntered);
+
+        else if (field.equalsIgnoreCase("city"))
+            enterTextInField(login.getCity(), textToBeEntered);
+
+        else if (field.equalsIgnoreCase("state"))
+            enterTextInField(login.getState(), textToBeEntered);
+
 
     }
 
