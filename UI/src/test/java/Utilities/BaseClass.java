@@ -1,15 +1,10 @@
 package Utilities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.jspecify.annotations.Nullable;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
 
@@ -64,6 +59,17 @@ public class BaseClass
     public void clickElement(WebElement ele)
     {
         ele.click();
+    }
+
+    public String getAttributeValue(WebElement ele, String attribute)
+    {
+        return ele.getAttribute(attribute);
+    }
+
+    public void selectTextFromDropdown(WebElement ele, String textToSelect)
+    {
+        Select select = new Select(ele);
+        select.selectByValue(textToSelect);
     }
 
     public void switchToFrame()
