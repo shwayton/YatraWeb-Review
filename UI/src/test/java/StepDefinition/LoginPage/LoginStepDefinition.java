@@ -8,7 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class LoginStepDefinition extends BaseClass
@@ -34,17 +33,17 @@ public class LoginStepDefinition extends BaseClass
     {
         if (acct_Type.equalsIgnoreCase(TextConstants.PERSONAL_ACCOUNT)) {
             if (elementIsDisplayed(login.getGoogleLoginBtn()))
-                enterTextInField(login.getLoginPhoneNumber(), credential);
+                enterTextInField(login.getLoginEmailID(), credential);
             else {
                 clickElement(login.getSME_Account());
-                enterTextInField(login.getLoginPhoneNumber(), credential);
+                enterTextInField(login.getLoginEmailID(), credential);
             }
         } else if (acct_Type.equalsIgnoreCase(TextConstants.SME_ACCOUNT)) {
             if (!elementIsDisplayed(login.getGoogleLoginBtn()))
-                enterTextInField(login.getLoginPhoneNumber(), credential);
+                enterTextInField(login.getLoginEmailID(), credential);
             else {
                 clickElement(login.getSME_Account());
-                enterTextInField(login.getLoginPhoneNumber(), credential);
+                enterTextInField(login.getLoginEmailID(), credential);
             }
 
         }
@@ -209,4 +208,14 @@ public class LoginStepDefinition extends BaseClass
 
     }
 
+    @When("the user enters the {string} on sign In page for {string}")
+    public void theUserEntersTheOnSignInPageFor(String phoneNo, String acctType)
+    {
+        //+91 8825370400
+        String[] str = phoneNo.split(" ");
+        String countryCode = str[0];
+
+        enterTextInField(login.getLoginEmailID(), str[1].substring(0,4));
+        enterTextInField(login.getLoginPhoneNo(), str[1].substring(4));
+    }
 }

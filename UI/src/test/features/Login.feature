@@ -4,13 +4,13 @@ Feature: Login to the yatra portal with or without google sign-in
   Scenario Outline: Login to Yatra using "<phone_number>"
     Given the user is on the yatra website
     And the login dialog box appears on the screen
-    When the user enters the "<phone_number>" on "<accountType>"
-    And the user clicks on "login"
+    When the user enters the "<phone_number>" on sign In page for "<accountType>"
+    And the user clicks on "<button1>"
     Then the user enters the OTP received
-    And the user clicks on "Verify"
+    And the user clicks on "<button2>"
     Examples:
-      | phone_number | accountType      |
-      | 8825370400   | Personal Account |
+      | phone_number   | accountType      | button1 | button2 |
+      | +91 1234567890 | Personal Account | login   | Verify  |
 
 
   Scenario Outline: Login to Yatra using already registered "<email_id>" with password
@@ -59,7 +59,7 @@ Feature: Login to the yatra portal with or without google sign-in
       | email_id             | button1 | password         | phone_number    | full_name               | button2 | accountType      | button3 |
       | abcdd.001@gmazil.com | login   | shwetanD7*ijegoh | +591 1234567855 | Ms. qwertyu powrthiosfh | Sign Up | Personal Account | verify  |
 
-  @smoke
+
   Scenario Outline: Login to Yatra using non registered "<email_id>" for "SME account type"
     Given the user is on the yatra website
     When the login dialog box appears on the screen

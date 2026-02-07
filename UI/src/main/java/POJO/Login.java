@@ -1,6 +1,5 @@
 package POJO;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -22,7 +21,7 @@ public class Login
     WebElement loginDialogBoxTextElement;
 
     @FindBy(xpath = "//input[@placeholder ='Email Id / Mobile Number']")
-    WebElement loginPhoneNumber;
+    WebElement loginEmailID;
 
     @FindBy(xpath = "//*[@id = 'google-login-btn']")
     WebElement googleLoginBtn;
@@ -116,6 +115,14 @@ public class Login
 
     @FindBy(name = "state")
     WebElement state;
+
+    @FindBy(id = "mobile-number")
+    WebElement loginPhoneNo;
+
+    public WebElement getLoginPhoneNo()
+    {
+        return loginPhoneNo;
+    }
 
     public WebElement getGst()
     {
@@ -272,9 +279,9 @@ public class Login
         return googleLoginBtn;
     }
 
-    public WebElement getLoginPhoneNumber()
+    public WebElement getLoginEmailID()
     {
-        return loginPhoneNumber;
+        return loginEmailID;
     }
 
     public WebElement getLoginDialogBoxTextElement()
