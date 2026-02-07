@@ -217,5 +217,20 @@ public class LoginStepDefinition extends BaseClass
 
         enterTextInField(login.getLoginEmailID(), str[1].substring(0,4));
         enterTextInField(login.getLoginPhoneNo(), str[1].substring(4));
+
+        clickElement(login.getCountryCodeField());
+        enterTextInField(login.getCountryListSearchField(), countryCode.substring(1));
+
+        if (login.getCountryList().getFirst().getText().trim().equalsIgnoreCase(TextConstants.NO_MATCH_FOUND))
+            System.out.println("Incorrect country code");
+        else {
+            for (WebElement ele : login.getCountryList()) {
+                if (ele.getText().split("\\R")[1].equalsIgnoreCase(countryCode)) {
+                    clickElement(ele);
+                    break;
+                }
+            }
+        }
+
     }
 }
