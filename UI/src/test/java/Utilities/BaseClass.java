@@ -1,15 +1,10 @@
 package Utilities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.jspecify.annotations.Nullable;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.safari.SafariDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
 
@@ -18,14 +13,11 @@ public class BaseClass
     public WebDriver driver;
     public WebDriver getDriver()
     {
-        WebDriverManager.safaridriver().setup();
-        driver = new SafariDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(100));
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         return driver;
-    }
 
-//    public WebDriver getDriver(String browser)
-//    {
 //        if(browser.equalsIgnoreCase("Chrome"))
 //            driver = WebDriverManager.chromedriver().getWebDriver();
 //
@@ -36,13 +28,11 @@ public class BaseClass
 //            driver = WebDriverManager.safaridriver().getWebDriver();
 //
 //        return driver;
-//    }
+   }
 
-    public void openWebsite(String url) throws InterruptedException
+    public void openWebsite(String url)
     {
-
         driver.get(url);
-
         driver.manage().window().maximize();
     }
 
@@ -69,6 +59,17 @@ public class BaseClass
     public void clickElement(WebElement ele)
     {
         ele.click();
+    }
+
+    public String getAttributeValue(WebElement ele, String attribute)
+    {
+        return ele.getAttribute(attribute);
+    }
+
+    public void selectTextFromDropdown(WebElement ele, String textToSelect)
+    {
+        Select select = new Select(ele);
+        select.selectByValue(textToSelect);
     }
 
     public void switchToFrame()
