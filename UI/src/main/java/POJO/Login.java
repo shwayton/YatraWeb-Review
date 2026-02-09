@@ -119,6 +119,14 @@ public class Login
     @FindBy(id = "mobile-number")
     WebElement loginPhoneNo;
 
+    @FindBy(xpath = "//span[@class='style_cross__q1ZoV']/img")
+    WebElement closePopup;
+
+    public WebElement getClosePopup()
+    {
+        return closePopup;
+    }
+
     public WebElement getLoginPhoneNo()
     {
         return loginPhoneNo;

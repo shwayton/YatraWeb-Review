@@ -19,26 +19,26 @@ public class LoginStepDefinition extends BaseClass
     public void the_user_is_on_the_yatra_website()
     {
         openWebsite("https://www.yatra.com/");
-        Assert.assertEquals(getPageTitle(), TextConstants.YATRA_TITLE);
+        Assert.assertEquals(getPageTitle(), LoginTextConstants.YATRA_TITLE);
     }
 
     @Given("the login dialog box appears on the screen")
     public void the_login_dialog_box_appears_on_the_screen()
     {
-        Assert.assertEquals(getRequiredText(login.getLoginDialogBoxTextElement()), TextConstants.LOGIN_DIALOG_TEXT_BOX);
+        Assert.assertEquals(getRequiredText(login.getLoginDialogBoxTextElement()), LoginTextConstants.LOGIN_DIALOG_TEXT_BOX);
     }
 
     @When("the user enters the {string} on {string}")
     public void the_user_enters_the_on(String credential, String acct_Type)
     {
-        if (acct_Type.equalsIgnoreCase(TextConstants.PERSONAL_ACCOUNT)) {
+        if (acct_Type.equalsIgnoreCase(LoginTextConstants.PERSONAL_ACCOUNT)) {
             if (elementIsDisplayed(login.getGoogleLoginBtn()))
                 enterTextInField(login.getLoginEmailID(), credential);
             else {
                 clickElement(login.getSME_Account());
                 enterTextInField(login.getLoginEmailID(), credential);
             }
-        } else if (acct_Type.equalsIgnoreCase(TextConstants.SME_ACCOUNT)) {
+        } else if (acct_Type.equalsIgnoreCase(LoginTextConstants.SME_ACCOUNT)) {
             if (!elementIsDisplayed(login.getGoogleLoginBtn()))
                 enterTextInField(login.getLoginEmailID(), credential);
             else {
@@ -107,7 +107,7 @@ public class LoginStepDefinition extends BaseClass
     @When("the user lands on Sign Up page")
     public void the_user_lands_on_sign_up_page()
     {
-        Assert.assertEquals(getRequiredText(login.getSignUpHeader()).trim(), TextConstants.SIGNUP_HEADER);
+        Assert.assertEquals(getRequiredText(login.getSignUpHeader()).trim(), LoginTextConstants.SIGNUP_HEADER);
     }
 
     @Then("^the user enters \"([^\"]*)\" in \"([^\"]*)\"")
@@ -121,7 +121,7 @@ public class LoginStepDefinition extends BaseClass
             clickElement(login.getCountryCodeField());
             enterTextInField(login.getCountryListSearchField(), countryCode.substring(1));
 
-            if (login.getCountryList().getFirst().getText().trim().equalsIgnoreCase(TextConstants.NO_MATCH_FOUND))
+            if (login.getCountryList().getFirst().getText().trim().equalsIgnoreCase(LoginTextConstants.NO_MATCH_FOUND))
                 System.out.println("Incorrect country code");
             else {
                 for (WebElement ele : login.getCountryList()) {
@@ -221,7 +221,7 @@ public class LoginStepDefinition extends BaseClass
         clickElement(login.getCountryCodeField());
         enterTextInField(login.getCountryListSearchField(), countryCode.substring(1));
 
-        if (login.getCountryList().getFirst().getText().trim().equalsIgnoreCase(TextConstants.NO_MATCH_FOUND))
+        if (login.getCountryList().getFirst().getText().trim().equalsIgnoreCase(LoginTextConstants.NO_MATCH_FOUND))
             System.out.println("Incorrect country code");
         else {
             for (WebElement ele : login.getCountryList()) {

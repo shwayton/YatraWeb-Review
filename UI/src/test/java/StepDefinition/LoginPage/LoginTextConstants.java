@@ -6,7 +6,7 @@ TRY TO REPLACE WITH ENUM
 
  */
 
-public class TextConstants
+public class LoginTextConstants
 {
     public static final String YATRA_TITLE = "Yatra.com – Best Travel Website. Book Flights, Hotels, Trains, Holidays & Bus Tickets";
     public static final String LOGIN_DIALOG_TEXT_BOX = "Login or Create an Account";
