@@ -48,7 +48,7 @@ public class Login
     WebElement loginBox;
 
     @FindBy(id = "pass")
-    WebElement  passwordField;
+    WebElement passwordField;
 
     @FindBy(xpath = "//div[contains(text(),'Login / Signup')]")
     WebElement Login_SignUpBtn;
@@ -78,7 +78,7 @@ public class Login
     WebElement signUpPronoun;
 
     @FindBy(xpath = "//span[@class='flag' and text()='Mr.']/following-sibling::ul/li")
-    List<WebElement>  pronounList;
+    List<WebElement> pronounList;
 
     @FindBy(id = "whtps")
     WebElement whatsappCheckBox;
@@ -98,10 +98,10 @@ public class Login
     @FindBy(xpath = "//button[@type='submit']")
     WebElement signUpBtn;
 
-    @FindBy(id ="gst")
+    @FindBy(id = "gst")
     WebElement gst;
 
-    @FindBy(id ="company")
+    @FindBy(id = "company")
     WebElement companyName;
 
     @FindBy(id = "address")

@@ -1,16 +1,19 @@
 package Utilities;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
+import java.util.List;
 
 public class BaseClass
 {
     public WebDriver driver;
+
     public WebDriver getDriver()
     {
         WebDriverManager.chromedriver().setup();
@@ -28,7 +31,7 @@ public class BaseClass
 //            driver = WebDriverManager.safaridriver().getWebDriver();
 //
 //        return driver;
-   }
+    }
 
     public void openWebsite(String url)
     {
@@ -70,6 +73,11 @@ public class BaseClass
     {
         Select select = new Select(ele);
         select.selectByValue(textToSelect);
+    }
+
+    public List<WebElement> getListOfElements(String xpath)
+    {
+        return driver.findElements(By.xpath(xpath));
     }
 
     public void switchToFrame()

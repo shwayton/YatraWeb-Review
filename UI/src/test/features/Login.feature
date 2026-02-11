@@ -1,7 +1,8 @@
-Feature: Login to the yatra portal with or without google sign-in
+Feature: Login to the Yatra portal with or without google sign-in
 
+  @smoke
   Scenario Outline: Login to Yatra using "<phone_number>"
-    Given the user is on the yatra website
+    Given the user is on the Yatra home page
     And the login dialog box appears on the screen
     When the user enters the "<phone_number>" on sign In page for "<accountType>"
     And the user clicks on "<button1>"
@@ -13,7 +14,7 @@ Feature: Login to the yatra portal with or without google sign-in
 
 
   Scenario Outline: Login to Yatra using already registered "<email_id>" with password
-    Given the user is on the yatra website
+    Given the user is on the Yatra home page
     When the login dialog box appears on the screen
     When the user enters the "<email_id>" on "<accountType>"
     And the user clicks on "<button1>"
@@ -26,7 +27,7 @@ Feature: Login to the yatra portal with or without google sign-in
 
 
   Scenario Outline: Login to Yatra using already registered email id with OTP
-    Given the user is on the yatra website
+    Given the user is on the Yatra home page
     When the login dialog box appears on the screen
     When the user enters the "<email_id>" on "<accountType>"
     And the user clicks on "<button1>"
@@ -39,7 +40,7 @@ Feature: Login to the yatra portal with or without google sign-in
       | shwayton.001@gmail.com | Personal Account | login   | verify  |
 
   Scenario Outline: Sign Up to Yatra using non registered "<email_id>" for "Personal account Type"
-    Given the user is on the yatra website
+    Given the user is on the Yatra home page
     When the login dialog box appears on the screen
     When the user enters the "<email_id>" on "<accountType>"
     And the user clicks on "<button1>"
@@ -60,7 +61,7 @@ Feature: Login to the yatra portal with or without google sign-in
 
 
   Scenario Outline: Login to Yatra using non registered "<email_id>" for "SME account type"
-    Given the user is on the yatra website
+    Given the user is on the Yatra home page
     When the login dialog box appears on the screen
     When the user enters the "<email_id>" on "SME account"
     And the user clicks on "<button1>"
@@ -82,5 +83,5 @@ Feature: Login to the yatra portal with or without google sign-in
       | abcdd.001@gmazil.com | login   | bjhguyfudfY7* | +1 2587946135 | Dr. JGVU KHKG | 456785434564543657 | AGL Corp     | Triumph Towers  | 973448  | HGCUY | khfvhjtcf |
 # #############    NOT DEVELOPED YET    #############
 #  Scenario Outline: Login to Yatra using google sign in
-#    Given the user is on the yatra website
+#    Given the user is on the Yatra home page
 #    When the login dialog box appears on the screen

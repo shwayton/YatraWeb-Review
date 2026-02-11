@@ -15,10 +15,11 @@ public class LoginStepDefinition extends BaseClass
     WebDriver driver = getDriver();
     Login login = new Login(driver);
 
-    @Given("the user is on the yatra website")
+    @Given("the user is on the Yatra home page")
     public void the_user_is_on_the_yatra_website()
     {
         openWebsite("https://www.yatra.com/");
+        //openWebsite("https://www.yatra.com/flights");
         Assert.assertEquals(getPageTitle(), LoginTextConstants.YATRA_TITLE);
     }
 
@@ -66,7 +67,7 @@ public class LoginStepDefinition extends BaseClass
             clickElement(login.getVerifyBtn());
         else if (string.equalsIgnoreCase("PasswordLogin"))
             clickElement(login.getLoginBtnAfterPassword());
-        else if(string.equalsIgnoreCase("Sign Up"))
+        else if (string.equalsIgnoreCase("Sign Up"))
             clickElement(login.getSignUpBtn());
     }
 
@@ -113,8 +114,7 @@ public class LoginStepDefinition extends BaseClass
     @Then("^the user enters \"([^\"]*)\" in \"([^\"]*)\"")
     public void the_user_enters(String textToBeEntered, String field)
     {
-        if (field.equalsIgnoreCase("phone_number"))
-        {
+        if (field.equalsIgnoreCase("phone_number")) {
             String[] str = textToBeEntered.split(" ");
             String countryCode = str[0];
 
@@ -132,10 +132,7 @@ public class LoginStepDefinition extends BaseClass
                 }
             }
             enterTextInField(login.getSignUpPhoneNo(), str[1]);
-        }
-
-        else if (field.equalsIgnoreCase("full_name"))
-        {
+        } else if (field.equalsIgnoreCase("full_name")) {
             String[] str = textToBeEntered.split(" ");
 
             clickElement(login.getSignUpPronoun());
@@ -152,9 +149,7 @@ public class LoginStepDefinition extends BaseClass
             for (int i = 1; i < str.length; i++)
                 nameToEnter = nameToEnter + str[i] + " ";
             enterTextInField(login.getSignUpName(), nameToEnter.trim());
-        }
-
-        else if (field.equalsIgnoreCase("GST_number"))
+        } else if (field.equalsIgnoreCase("GST_number"))
             enterTextInField(login.getGst(), textToBeEntered);
 
         else if (field.equalsIgnoreCase("company_name"))
@@ -215,7 +210,7 @@ public class LoginStepDefinition extends BaseClass
         String[] str = phoneNo.split(" ");
         String countryCode = str[0];
 
-        enterTextInField(login.getLoginEmailID(), str[1].substring(0,4));
+        enterTextInField(login.getLoginEmailID(), str[1].substring(0, 4));
         enterTextInField(login.getLoginPhoneNo(), str[1].substring(4));
 
         clickElement(login.getCountryCodeField());

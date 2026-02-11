@@ -18,22 +18,22 @@ public class FlightSearch
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy (xpath = "//button/span[text() = 'Flights']")
+    @FindBy(xpath = "//button/span[text() = 'Flights']")
     WebElement flightsTab;
 
-    @FindBy (xpath = "//button/span[text() = 'Hotels']")
+    @FindBy(xpath = "//button/span[text() = 'Hotels']")
     WebElement hotelsTab;
 
-    @FindBy (xpath = "//button/span[text() = 'Holidays']")
+    @FindBy(xpath = "//button/span[text() = 'Holidays']")
     WebElement holidaysTab;
 
-    @FindBy (xpath = "//button/span[text() = 'Bus']")
+    @FindBy(xpath = "//button/span[text() = 'Bus']")
     WebElement busTab;
 
-    @FindBy (xpath = "//button/span[text() = 'Trains']")
+    @FindBy(xpath = "//button/span[text() = 'Trains']")
     WebElement trainsTab;
 
-    @FindBy (xpath = "//button/span[text() = 'Cabs']")
+    @FindBy(xpath = "//button/span[text() = 'Cabs']")
     WebElement cabsTab;
 
     @FindBy(xpath = "//h4[text() = 'One Way']//ancestor::label")
@@ -57,11 +57,11 @@ public class FlightSearch
     @FindBy(xpath = "//div[contains(@aria-label, 'Departure From')]//following-sibling::div//span")
     List<WebElement> departureCityList;
 
-     @FindBy(xpath = "//label[text()='Going To']//following::div[1]")
+    @FindBy(xpath = "//label[text()='Going To']//following::div[1]")
     WebElement goToCity;
 
     @FindBy(xpath = "//div[contains(@aria-label, 'Going To')]//following-sibling::div//span")
-    WebElement goToCityList;
+    List<WebElement> goToCityList;
 
     @FindBy(xpath = "//div[@aria-label='Departure Date inputbox']")
     WebElement departureDate;
@@ -73,25 +73,29 @@ public class FlightSearch
     @FindBy(xpath = "//div[@class='react-datepicker__month-container']/div//button[@aria-label = 'Previous Month']//following-sibling::span")
     List<WebElement> monthNames;
 
+    //@FindBy(xpath = "(//div[@class='react-datepicker__month-container']/div//button[@aria-label = 'Previous Month']//following-sibling::span)[1]")
+    @FindBy(xpath = "(//button[@aria-label = 'Previous Month']//following-sibling::span)[1]")
+    WebElement currentMonthYear;
+
     //same for departure and return
     //Need to use the isVisible() method to identify the correct one
-    @FindBy(xpath = "//button[@aria-label = 'Next Month']")
-    List<WebElement> nextmonthBtn;
+    @FindBy(xpath = "//button[@aria-label = 'Next Month' and not (@style)]")
+    WebElement nextMonthBtn;
 
     @FindBy(xpath = "//div[@aria-label='Travellers class inputbox']")
-    WebElement travelerClass;
+    WebElement travellerAndClass;
 
     @FindBy(xpath = "//div[@id = 'traveller_container']//p[@aria-label = 'Adult']/following-sibling::div/ul/li")
-    WebElement noOfAdults;
+    List<WebElement> noOfAdults;
 
     @FindBy(xpath = "//div[@id = 'traveller_container']//p[@aria-label = 'Child']/following-sibling::div/ul/li")
-    WebElement noOfChildren;
+    List<WebElement> noOfChildren;
 
     @FindBy(xpath = "//div[@id = 'traveller_container']//p[@aria-label = 'Infant']/following-sibling::div/ul/li")
-    WebElement noOfInfants;
+    List<WebElement> noOfInfants;
 
     @FindBy(xpath = "//p[contains(text(),'Choose Travel Class')]/following-sibling::div/label")
-    WebElement travelClass;
+    List<WebElement> travelClass;
 
     @FindBy(xpath = "//button[text()='Done']")
     WebElement travelDetailsDone;
@@ -99,20 +103,57 @@ public class FlightSearch
     @FindBy(xpath = "//button[text()='Search']")
     WebElement searchButton;
 
-    @FindBy(xpath = "//span[text()='Non-Stop Flights']/parent::label//parent::div/div")
-    List<WebElement> fareType;
+    @FindBy(xpath = "//div[contains(@aria-label,'Regular')]")
+    WebElement regularFareType;
+
+    @FindBy(xpath = "//div[contains(@aria-label,'Student')]")
+    WebElement studentFareType;
+
+    @FindBy(xpath = "//div[contains(@aria-label,'Senior Citizen')]")
+    WebElement seniorCitizenFareType;
+
+    @FindBy(xpath = "//div[contains(@aria-label,'Armed Forces')]")
+    WebElement armedForcesFareType;
 
     @FindBy(xpath = "//span[text()='Non-Stop Flights']")
     WebElement nonStopFlightsBtn;
+
+    @FindBy(xpath = "//span[@class='style_cross__q1ZoV']/img")
+    WebElement closePopup;
+
+    public WebElement getClosePopup()
+    {
+        return closePopup;
+    }
+
+    public WebElement getStudentFareType()
+    {
+        return studentFareType;
+    }
+
+    public WebElement getSeniorCitizenFareType()
+    {
+        return seniorCitizenFareType;
+    }
+
+    public WebElement getArmedForcesFareType()
+    {
+        return armedForcesFareType;
+    }
+
+    public WebElement getCurrentMonthYear()
+    {
+        return currentMonthYear;
+    }
 
     public WebElement getSearchButton()
     {
         return searchButton;
     }
 
-    public List<WebElement> getFareType()
+    public WebElement getRegularFareType()
     {
-        return fareType;
+        return regularFareType;
     }
 
     public WebElement getNonStopFlightsBtn()
@@ -190,7 +231,7 @@ public class FlightSearch
         return goToCity;
     }
 
-    public WebElement getGoToCityList()
+    public List<WebElement> getGoToCityList()
     {
         return goToCityList;
     }
@@ -210,32 +251,32 @@ public class FlightSearch
         return monthNames;
     }
 
-    public List<WebElement> getNextmonthBtn()
+    public WebElement getNextMonthBtn()
     {
-        return nextmonthBtn;
+        return nextMonthBtn;
     }
 
-    public WebElement getTravelerClass()
+    public WebElement getTravellerAndClass()
     {
-        return travelerClass;
+        return travellerAndClass;
     }
 
-    public WebElement getNoOfAdults()
+    public List<WebElement> getNoOfAdults()
     {
         return noOfAdults;
     }
 
-    public WebElement getNoOfChildren()
+    public List<WebElement> getNoOfChildren()
     {
         return noOfChildren;
     }
 
-    public WebElement getNoOfInfants()
+    public List<WebElement> getNoOfInfants()
     {
         return noOfInfants;
     }
 
-    public WebElement getTravelClass()
+    public List<WebElement> getTravelClass()
     {
         return travelClass;
     }
