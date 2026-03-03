@@ -12,13 +12,17 @@ import java.util.List;
 
 public class BaseClass
 {
-    public WebDriver driver;
+    private static WebDriver driver;
 
     public WebDriver getDriver()
     {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        if (driver == null) {
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+            
+        }
+
         return driver;
 
 //        if(browser.equalsIgnoreCase("Chrome"))
@@ -78,6 +82,11 @@ public class BaseClass
     public List<WebElement> getListOfElements(String xpath)
     {
         return driver.findElements(By.xpath(xpath));
+    }
+
+    public WebElement findTheElement(String xpath)
+    {
+        return driver.findElement(By.xpath(xpath));
     }
 
     public void switchToFrame()

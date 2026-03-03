@@ -48,11 +48,11 @@ public class DatePicker extends BaseClass
 
     public void selectDate(String date)
     {
-        //todaydate = 10-02-2026
-        //targetdate = 15-03-2026
-
+        System.out.println("date: "+date);
         String[] targetDateComp = date.split("-");
-        //dateComp = day-month-year -- todayDate 10-02-2026
+
+        if(targetDateComp[0].charAt(0)=='0')
+            targetDateComp[0] = targetDateComp[0].substring(1);
 
         String currentMonthYearFromSite = flightSearch.getCurrentMonthYear().getText();
         String[] currentMonthYear = currentMonthYearFromSite.split(" ");
@@ -82,12 +82,21 @@ public class DatePicker extends BaseClass
         //SCROLL-DAY
         //Month-Block
         //div[contains(@aria-label, '2026-02')]/div/div/span
-        String monthPath = "//div[contains(@aria-label,'" + targetDateComp[2] + "-" + String.valueOf(targetMonth) + "')]/div/div/span";
+        String monthPath = "";
+        if(targetMonth<=9)
+           // monthPath = "//div[contains(@aria-label,'" + targetDateComp[2] + "-0" + String.valueOf(targetMonth) + "')]/div/div/span";
+        monthPath = "//div[contains(@aria-label,'" + targetDateComp[2] + "-0" + String.valueOf(targetMonth) + "')]/div/div";
+        else
+            //monthPath = "//div[contains(@aria-label,'" + targetDateComp[2] + "-" + String.valueOf(targetMonth) + "')]/div/div/span";
+            monthPath = "//div[contains(@aria-label,'" + targetDateComp[2] + "-" + String.valueOf(targetMonth) + "')]/div/div";
+
         List<WebElement> listOfDays = getListOfElements(monthPath);
 
         for (WebElement ele : listOfDays) {
-            if (ele.getText().equalsIgnoreCase(targetDateComp[0]))
+            if (ele.getText().equalsIgnoreCase(targetDateComp[0])) {
                 clickElement(ele);
+                break;
+            }
         }
 
     }

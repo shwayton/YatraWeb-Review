@@ -12,8 +12,7 @@ import java.util.List;
 
 public class LoginStepDefinition extends BaseClass
 {
-    WebDriver driver = getDriver();
-    Login login = new Login(driver);
+    Login login = new Login(getDriver());
 
     @Given("the user is on the Yatra home page")
     public void the_user_is_on_the_yatra_website()

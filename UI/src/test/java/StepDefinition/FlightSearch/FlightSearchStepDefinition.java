@@ -1,20 +1,20 @@
 package StepDefinition.FlightSearch;
 
 import POJO.FlightSearch;
+import Utilities.AttributeValue;
 import Utilities.BaseClass;
 import Utilities.DatePicker;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.*;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import java.util.List;
 
 public class FlightSearchStepDefinition extends BaseClass
 {
 
-    WebDriver driver = getDriver();
-    FlightSearch flight = new FlightSearch(driver);
-
+    FlightSearch flight = new FlightSearch(getDriver());
+    DatePicker dp = new DatePicker();
 
     @When("the user selects journey type as {string}")
     public void the_user_selects_journey_type_as(String journeyType)
@@ -44,11 +44,14 @@ public class FlightSearchStepDefinition extends BaseClass
             clickElement(flight.getDepartsFromField());
             enterTextInField(flight.getDepartureCity(), city);
 
-            for (int i = 0; i < flight.getDepartureCityList().size() - 1; ) {
-                List<WebElement> ele = flight.getDepartureCityList();
+            List<WebElement> ele = flight.getDepartureCityList();
 
-                if (ele.get(i).getText().equalsIgnoreCase(city))
+            for (int i = 0; i < flight.getDepartureCityList().size() - 1; ) {
+
+                if (ele.get(i).getText().equalsIgnoreCase(city)) {
                     clickElement(ele.get(i));
+                    break;
+                }
 
                 i = i + 2;
             }
@@ -56,11 +59,13 @@ public class FlightSearchStepDefinition extends BaseClass
             clickElement(flight.getGoingToField());
             enterTextInField(flight.getGoToCity(), city);
 
+            List<WebElement> ele = flight.getGoToCityList();
             for (int i = 0; i < flight.getGoToCityList().size() - 1; ) {
-                List<WebElement> ele = flight.getGoToCityList();
 
-                if (ele.get(i).getText().equalsIgnoreCase(city))
+                if (ele.get(i).getText().equalsIgnoreCase(city)) {
                     clickElement(ele.get(i));
+                    break;
+                }
 
                 i = i + 2;
             }
@@ -71,20 +76,20 @@ public class FlightSearchStepDefinition extends BaseClass
     public void the_user_selects_departure_date(String typeOfDate, String date)
     {
         //15-03-2026
-        DatePicker dp = new DatePicker();
 
         if (typeOfDate.equalsIgnoreCase("departureDate")) {
-            clickElement(flight.getDepartureDate());
+            clickElement(flight.getDepartureDate().getFirst());
             dp.selectDate(date);
         } else if (typeOfDate.equalsIgnoreCase("returnDate")) {
-            clickElement(flight.getReturnDate());
+            //clickElement(flight.getReturnDate());
             dp.selectDate(date);
         }
     }
 
     @When("the user selects {string} adults, {string} children and {string} infants")
-    public void the_user_selects_adults_children_and_infants(String adults, String children, String infants)
+    public void the_user_selects_adults_children_and_infants(String adults, String children, String infants) throws InterruptedException
     {
+        //findTheElement("//div[@aria-label='Travellers class inputbox']").click();
         clickElement(flight.getTravellerAndClass());
 
         if (Integer.parseInt(adults) <= 0)
@@ -94,19 +99,20 @@ public class FlightSearchStepDefinition extends BaseClass
 
             if (Integer.parseInt(children) > 0) {
                 if (Integer.parseInt(children) <= (9 - Integer.parseInt(adults)))
-                    clickElement(flight.getNoOfAdults().get(Integer.parseInt(children)));
+                    clickElement(flight.getNoOfChildren().get(Integer.parseInt(children)));
                 else
                     System.out.println("Please select less number of children");
             }
 
             if (Integer.parseInt(infants) > 0) {
                 if (!(Integer.parseInt(infants) > Integer.parseInt(adults)))
-                    clickElement(flight.getNoOfAdults().get(Integer.parseInt(infants)));
+                    clickElement(flight.getNoOfInfants().get(Integer.parseInt(infants)));
                 else
                     System.out.println("Number of infants should be less than number of adults");
             }
         }
 
+        Thread.sleep(5000);
 
     }
 
@@ -157,24 +163,37 @@ public class FlightSearchStepDefinition extends BaseClass
 
     }
 
-    @And("the user enters first city pair {string} to {string} with date {string}")
-    public void theUserEntersFirstCityPairToWithDate(String arg0, String arg1, String arg2, String arg3, String arg4, String arg5)
+    @And("the user enters city pair {int} {string} to {string} with date {string}")
+    public void theUserEntersFirstCityPairToWithDate(int pairNo, String city1, String city2, String date)
     {
+        String cityXPath = "";
 
-    }
+        //enter city1 and select it
+        clickElement(flight.getMultiCityDeparture().get(pairNo-1));
+        enterTextInField(flight.getMultiCityList(),city1);
+        cityXPath = "//li//span[text()='"+city1+"']";
+        clickElement(findTheElement(cityXPath));
 
-    @And("the user enters second city pair {string} to {string} with date {string}")
-    public void theUserEntersSecondCityPairToWithDate(String arg0, String arg1, String arg2, String arg3, String arg4, String arg5)
-    {
+        clickElement(flight.getMultiCityArrival().get(pairNo-1));
+        enterTextInField(flight.getMultiCityList(),city2);
+        cityXPath = "//li//span[text()='"+city2+"']";
+        clickElement(findTheElement(cityXPath));
+
+        clickElement(flight.getDepartureDate().get(pairNo-1));
+        dp.selectDate(date);
+
     }
 
     @And("the user selects {string}")
     public void theUserSelects(String travelClass)
     {
         for (WebElement ele : flight.getTravelClass()) {
-            if (ele.getAttribute("aria-label").equalsIgnoreCase(travelClass))
+            if(getAttributeValue(ele, AttributeValue.ARIA_LABEL).equalsIgnoreCase(travelClass)) {
                 clickElement(ele);
+                //clickElement(getDriver().findElement(By.xpath()));
+                break;
+            }
         }
-        clickElement(flight.getTravelDetailsDone());
+        //clickElement(flight.getTravelDetailsDone());
     }
 }

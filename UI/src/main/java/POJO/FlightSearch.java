@@ -9,7 +9,6 @@ import java.util.List;
 
 public class FlightSearch
 {
-
     private WebDriver driver;
 
     public FlightSearch(WebDriver driver)
@@ -51,20 +50,22 @@ public class FlightSearch
     @FindBy(xpath = "//div[contains(@aria-label, 'Going To')]")
     WebElement goingToField;
 
-    @FindBy(xpath = "//label[text()='Departure From']//following::div[1]")
+    //@FindBy(xpath = "//label[text()='Departure From']//parent::div[1]")
+    @FindBy(xpath = "//label[text()='Departure From']//parent::div[1]//input")
     WebElement departureCity;
 
     @FindBy(xpath = "//div[contains(@aria-label, 'Departure From')]//following-sibling::div//span")
     List<WebElement> departureCityList;
 
-    @FindBy(xpath = "//label[text()='Going To']//following::div[1]")
+    //@FindBy(xpath = "//label[text()='Going To']//parent::div[1]")
+    @FindBy(xpath = "//label[text()='Going To']//parent::div[1]//input")
     WebElement goToCity;
 
     @FindBy(xpath = "//div[contains(@aria-label, 'Going To')]//following-sibling::div//span")
     List<WebElement> goToCityList;
 
     @FindBy(xpath = "//div[@aria-label='Departure Date inputbox']")
-    WebElement departureDate;
+    List<WebElement> departureDate;
 
     @FindBy(xpath = "//div[@aria-label = 'Return Date inputbox']")
     WebElement returnDate;
@@ -120,6 +121,46 @@ public class FlightSearch
 
     @FindBy(xpath = "//span[@class='style_cross__q1ZoV']/img")
     WebElement closePopup;
+
+    @FindBy(xpath = "//button[contains(text(),'Add Another City')]")
+    WebElement addAnotherCity;
+
+    @FindBy(xpath = "//div[contains(@aria-label,'From')]")
+    List<WebElement> multiCityDeparture;
+
+    @FindBy(xpath = "//div[contains(@aria-label,'To')]")
+    List<WebElement> multiCityArrival;
+
+    @FindBy(xpath = "//button[text()='Remove']")
+    WebElement removeCity;
+
+    @FindBy(id = "input-with-icon-adornment")
+    WebElement multiCityList;
+
+    public WebElement getMultiCityList()
+    {
+        return multiCityList;
+    }
+
+    public WebElement getRemoveCity()
+    {
+        return removeCity;
+    }
+
+    public List<WebElement> getMultiCityArrival()
+    {
+        return multiCityArrival;
+    }
+
+    public List<WebElement> getMultiCityDeparture()
+    {
+        return multiCityDeparture;
+    }
+
+    public WebElement getAddAnotherCity()
+    {
+        return addAnotherCity;
+    }
 
     public WebElement getClosePopup()
     {
@@ -236,7 +277,7 @@ public class FlightSearch
         return goToCityList;
     }
 
-    public WebElement getDepartureDate()
+    public List<WebElement> getDepartureDate()
     {
         return departureDate;
     }

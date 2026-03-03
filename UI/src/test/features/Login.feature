@@ -1,6 +1,5 @@
 Feature: Login to the Yatra portal with or without google sign-in
 
-  @smoke
   Scenario Outline: Login to Yatra using "<phone_number>"
     Given the user is on the Yatra home page
     And the login dialog box appears on the screen
