@@ -21,7 +21,6 @@
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
             <version>6.3.3</version>
-            <scope>test</scope>
         </dependency>
 
         <!-- Source: https://mvnrepository.com/artifact/org.testng/testng -->

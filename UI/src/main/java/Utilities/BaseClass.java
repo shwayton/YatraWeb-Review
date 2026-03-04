@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
@@ -13,14 +14,15 @@ import java.util.List;
 public class BaseClass
 {
     private static WebDriver driver;
+    //private WaitUtils wait = new WaitUtils(driver);
 
-    public WebDriver getDriver()
+    public static WebDriver getDriver()
     {
         if (driver == null) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
-            driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
-            
+            //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
+            driver.manage().timeouts().implicitlyWait(Duration.ZERO);
         }
 
         return driver;
@@ -63,9 +65,15 @@ public class BaseClass
         return ele.isDisplayed();
     }
 
-    public void clickElement(WebElement ele)
-    {
-        ele.click();
+//    public void clickElement(WebElement ele)
+//    {
+//        ele.click();
+//    }
+
+    public void clickElement(WebElement ele) {
+        //WaitUtils wait = new WaitUtils(driver);
+        //wait.waitForClickable(ele).click();
+        WaitUtils.waitForClickable(ele).click();
     }
 
     public String getAttributeValue(WebElement ele, String attribute)

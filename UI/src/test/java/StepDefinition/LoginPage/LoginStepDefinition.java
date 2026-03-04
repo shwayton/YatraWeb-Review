@@ -4,7 +4,6 @@ import POJO.Login;
 import Utilities.AttributeValue;
 import Utilities.BaseClass;
 import io.cucumber.java.en.*;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -14,13 +13,13 @@ public class LoginStepDefinition extends BaseClass
 {
     Login login = new Login(getDriver());
 
-    @Given("the user is on the Yatra home page")
-    public void the_user_is_on_the_yatra_website()
-    {
-        openWebsite("https://www.yatra.com/");
-        //openWebsite("https://www.yatra.com/flights");
-        Assert.assertEquals(getPageTitle(), LoginTextConstants.YATRA_TITLE);
-    }
+//    @Given("the user is on the Yatra home page")
+//    public void the_user_is_on_the_yatra_website()
+//    {
+//        openWebsite("https://www.yatra.com/");
+//        //openWebsite("https://www.yatra.com/flights");
+//        Assert.assertEquals(getPageTitle(), LoginTextConstants.YATRA_TITLE);
+//    }
 
     @Given("the login dialog box appears on the screen")
     public void the_login_dialog_box_appears_on_the_screen()

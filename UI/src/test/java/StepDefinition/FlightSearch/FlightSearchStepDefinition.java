@@ -1,13 +1,15 @@
 package StepDefinition.FlightSearch;
 
 import POJO.FlightSearch;
+import StepDefinition.LoginPage.LoginTextConstants;
 import Utilities.AttributeValue;
 import Utilities.BaseClass;
 import Utilities.DatePicker;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
+
 import java.util.List;
 
 public class FlightSearchStepDefinition extends BaseClass
@@ -15,6 +17,14 @@ public class FlightSearchStepDefinition extends BaseClass
 
     FlightSearch flight = new FlightSearch(getDriver());
     DatePicker dp = new DatePicker();
+
+    @Given("the user is on the Yatra home page")
+    public void the_user_is_on_the_yatra_website()
+    {
+        openWebsite("https://www.yatra.com/");
+        //openWebsite("https://www.yatra.com/flights");
+        Assert.assertEquals(getPageTitle(), LoginTextConstants.YATRA_TITLE);
+    }
 
     @When("the user selects journey type as {string}")
     public void the_user_selects_journey_type_as(String journeyType)
