@@ -94,7 +94,8 @@ public class BaseClass
 
     public WebElement findTheElement(String xpath)
     {
-        return driver.findElement(By.xpath(xpath));
+        return WaitUtils.waitForVisible(driver.findElement(By.xpath(xpath)));
+        //return driver.findElement(By.xpath(xpath));
     }
 
     public void switchToFrame()

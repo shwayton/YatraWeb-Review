@@ -7,6 +7,7 @@ import Utilities.BaseClass;
 import Utilities.DatePicker;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.*;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -174,20 +175,24 @@ public class FlightSearchStepDefinition extends BaseClass
     }
 
     @And("the user enters city pair {int} {string} to {string} with date {string}")
-    public void theUserEntersFirstCityPairToWithDate(int pairNo, String city1, String city2, String date)
+    public void theUserEntersFirstCityPairToWithDate(int pairNo, String city1, String city2, String date) throws InterruptedException
     {
         String cityXPath = "";
 
         //enter city1 and select it
         clickElement(flight.getMultiCityDeparture().get(pairNo-1));
         enterTextInField(flight.getMultiCityList(),city1);
+        Thread.sleep(1500);
         cityXPath = "//li//span[text()='"+city1+"']";
-        clickElement(findTheElement(cityXPath));
+        WebElement e1 = findTheElement(cityXPath);
+        clickElement(e1);
 
         clickElement(flight.getMultiCityArrival().get(pairNo-1));
         enterTextInField(flight.getMultiCityList(),city2);
+        Thread.sleep(1500);
         cityXPath = "//li//span[text()='"+city2+"']";
-        clickElement(findTheElement(cityXPath));
+        WebElement e2 = findTheElement(cityXPath);
+        clickElement(e2);
 
         clickElement(flight.getDepartureDate().get(pairNo-1));
         dp.selectDate(date);

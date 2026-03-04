@@ -49,7 +49,7 @@ Feature: Search for a flight with required details
 
     Examples:
       | fromCity1 | toCity1 | date1      | fromCity2 | toCity2   | date2      | adults | children | infants | travelClass     |
-      | New Delhi | Toronto | 01-06-2026 | Mumbai    | Hyderabad | 05-06-2026 | 2      | 1        | 0       | premium economy |
+      | Miami     | Toronto | 01-06-2026 | Mumbai    | Hyderabad | 05-06-2026 | 2      | 1        | 0       | premium economy |
 
   Scenario Outline: User searches flight with more infants than adults
     Given the user is on the Yatra home page
