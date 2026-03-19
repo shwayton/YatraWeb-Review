@@ -181,29 +181,15 @@ public class FlightSearchStepDefinition extends BaseClass
     {
         String cityXPath = "";
 
-        List<CityList> list = TestDataLoader.getTravelDetails();
-
         clickElement(getListOfElements(flight.getMultiCityDeparture()).get(pairNo-1));
-        enterTextInField(flight.getMultiCityList(),list.get(pairNo).getFrom_city());
-        cityXPath = "//li//span[text()='"+list.get(pairNo).getFrom_city()+"']";
+        enterTextInField(flight.getMultiCityList(),fromCity);
+        cityXPath = "//li//span[text()='"+fromCity+"']";
         clickElement(WaitUtils.waitForClickable(By.xpath(cityXPath)));
-
-
-//        clickElement(getListOfElements(flight.getMultiCityDeparture()).get(pairNo-1));
-//        enterTextInField(flight.getMultiCityList(),fromCity);
-//        cityXPath = "//li//span[text()='"+fromCity+"']";
-//        clickElement(WaitUtils.waitForClickable(By.xpath(cityXPath)));
-
-
+        
         clickElement(getListOfElements(flight.getMultiCityArrival()).get(pairNo-1));
-        enterTextInField(flight.getMultiCityList(),list.get(pairNo).getTo_city());
-        cityXPath = "//li//span[text()='"+list.get(pairNo).getTo_city()+"']";
+        enterTextInField(flight.getMultiCityList(),toCity);
+        cityXPath = "//li//span[text()='"+toCity+"']";
         clickElement(WaitUtils.waitForClickable(By.xpath(cityXPath)));
-
-//        clickElement(getListOfElements(flight.getMultiCityArrival()).get(pairNo-1));
-//        enterTextInField(flight.getMultiCityList(),toCity);
-//        cityXPath = "//li//span[text()='"+toCity+"']";
-//        clickElement(WaitUtils.waitForClickable(By.xpath(cityXPath)));
 
         clickElement(getListOfElements(flight.getDepartureDate()).get(pairNo-1));
         dp.selectDate(date);
