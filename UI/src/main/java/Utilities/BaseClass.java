@@ -50,30 +50,34 @@ public class BaseClass
         return driver.getTitle();
     }
 
-    public String getRequiredText(WebElement ele)
+    public String getRequiredText(By locator)
     {
-        return ele.getText();
+        return findTheElement(locator).getText();
     }
 
-    public void enterTextInField(WebElement ele, String text)
+    public void enterTextInField(By locator, String text)
     {
-        ele.sendKeys(text);
+        findTheElement(locator).sendKeys(text);
     }
 
-    public Boolean elementIsDisplayed(WebElement ele)
+    public Boolean elementIsDisplayed(By locator)
     {
-        return ele.isDisplayed();
+        return findTheElement(locator).isDisplayed();
     }
 
-//    public void clickElement(WebElement ele)
-//    {
-//        ele.click();
-//    }
+    public void clickElement(By locator)
+    {
+        findTheElement(locator).click();
+    }
 
-    public void clickElement(WebElement ele) {
-        //WaitUtils wait = new WaitUtils(driver);
-        //wait.waitForClickable(ele).click();
-        WaitUtils.waitForClickable(ele).click();
+    public void clickElement(WebElement ele)
+    {
+        ele.click();
+    }
+
+    public String getAttributeValue(By locator, String attribute)
+    {
+        return findTheElement(locator).getAttribute(attribute);
     }
 
     public String getAttributeValue(WebElement ele, String attribute)
@@ -81,20 +85,20 @@ public class BaseClass
         return ele.getAttribute(attribute);
     }
 
-    public void selectTextFromDropdown(WebElement ele, String textToSelect)
+    public void selectTextFromDropdown(By locator, String textToSelect)
     {
-        Select select = new Select(ele);
+        Select select = new Select(findTheElement(locator));
         select.selectByValue(textToSelect);
     }
 
-    public List<WebElement> getListOfElements(String xpath)
+    public List<WebElement> getListOfElements(By locator)
     {
-        return driver.findElements(By.xpath(xpath));
+        return driver.findElements(locator);
     }
 
-    public WebElement findTheElement(String xpath)
+    public WebElement findTheElement(By locator)
     {
-        return driver.findElement(By.xpath(xpath));
+        return driver.findElement(locator);
     }
 
     public void switchToFrame()

@@ -58,7 +58,6 @@ Feature: Login to the Yatra portal with or without google sign-in
       | email_id             | button1 | password         | phone_number    | full_name               | button2 | accountType      | button3 |
       | abcdd.001@gmazil.com | login   | shwetanD7*ijegoh | +591 1234567855 | Ms. qwertyu powrthiosfh | Sign Up | Personal Account | verify  |
 
-
   Scenario Outline: Login to Yatra using non registered "<email_id>" for "SME account type"
     Given the user is on the Yatra home page
     When the login dialog box appears on the screen

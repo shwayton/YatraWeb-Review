@@ -1,6 +1,7 @@
 package Utilities;
 
 import POJO.FlightSearch;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -9,7 +10,7 @@ import java.util.List;
 public class DatePicker extends BaseClass
 {
     public WebDriver driver = getDriver();
-    FlightSearch flightSearch = new FlightSearch(driver);
+    FlightSearch flightSearch = new FlightSearch();
 
     public enum MonthEnum
     {
@@ -54,7 +55,7 @@ public class DatePicker extends BaseClass
         if(targetDateComp[0].charAt(0)=='0')
             targetDateComp[0] = targetDateComp[0].substring(1);
 
-        String currentMonthYearFromSite = flightSearch.getCurrentMonthYear().getText();
+        String currentMonthYearFromSite = findTheElement(flightSearch.getCurrentMonthYear()).getText();
         String[] currentMonthYear = currentMonthYearFromSite.split(" ");
         //"February 2026";
 
@@ -90,7 +91,7 @@ public class DatePicker extends BaseClass
             //monthPath = "//div[contains(@aria-label,'" + targetDateComp[2] + "-" + String.valueOf(targetMonth) + "')]/div/div/span";
             monthPath = "//div[contains(@aria-label,'" + targetDateComp[2] + "-" + String.valueOf(targetMonth) + "')]/div/div";
 
-        List<WebElement> listOfDays = getListOfElements(monthPath);
+        List<WebElement> listOfDays = getListOfElements(By.xpath(monthPath));
 
         for (WebElement ele : listOfDays) {
             if (ele.getText().equalsIgnoreCase(targetDateComp[0])) {

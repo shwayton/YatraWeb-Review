@@ -1,329 +1,256 @@
 package POJO;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 
-import java.util.List;
+public class FlightSearch {
 
-public class FlightSearch
-{
-    private WebDriver driver;
+    // ================= LOCATORS =================
 
-    public FlightSearch(WebDriver driver)
-    {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
+    private By flightsTab = By.xpath("//button/span[text() = 'Flights']");
+    private By hotelsTab = By.xpath("//button/span[text() = 'Hotels']");
+    private By holidaysTab = By.xpath("//button/span[text() = 'Holidays']");
+    private By busTab = By.xpath("//button/span[text() = 'Bus']");
+    private By trainsTab = By.xpath("//button/span[text() = 'Trains']");
+    private By cabsTab = By.xpath("//button/span[text() = 'Cabs']");
 
-    @FindBy(xpath = "//button/span[text() = 'Flights']")
-    WebElement flightsTab;
+    private By oneWayBtn = By.xpath("//h4[text() = 'One Way']//ancestor::label");
+    private By roundTripBtn = By.xpath("//h4[text() = 'Round Trip']//ancestor::label");
+    private By multiCityBtn = By.xpath("//h4[text() = 'Multi City']//ancestor::label");
 
-    @FindBy(xpath = "//button/span[text() = 'Hotels']")
-    WebElement hotelsTab;
+    private By departsFromField = By.xpath("//div[contains(@aria-label, 'Departure From')]");
+    private By goingToField = By.xpath("//div[contains(@aria-label, 'Going To')]");
 
-    @FindBy(xpath = "//button/span[text() = 'Holidays']")
-    WebElement holidaysTab;
+    private By departureCity = By.xpath("//label[text()='Departure From']//parent::div[1]//input");
+    private By departureCityList = By.xpath("//div[contains(@aria-label, 'Departure From')]//following-sibling::div//span");
 
-    @FindBy(xpath = "//button/span[text() = 'Bus']")
-    WebElement busTab;
+    private By goToCity = By.xpath("//label[text()='Going To']//parent::div[1]//input");
+    private By goToCityList = By.xpath("//div[contains(@aria-label, 'Going To')]//following-sibling::div//span");
 
-    @FindBy(xpath = "//button/span[text() = 'Trains']")
-    WebElement trainsTab;
+    private By departureDate = By.xpath("//div[@aria-label='Departure Date inputbox']");
+    private By returnDate = By.xpath("//div[@aria-label = 'Return Date inputbox']");
 
-    @FindBy(xpath = "//button/span[text() = 'Cabs']")
-    WebElement cabsTab;
+    private By monthNames = By.xpath("//div[@class='react-datepicker__month-container']/div//button[@aria-label = 'Previous Month']//following-sibling::span");
 
-    @FindBy(xpath = "//h4[text() = 'One Way']//ancestor::label")
-    WebElement oneWayBtn;
+    private By currentMonthYear = By.xpath("(//button[@aria-label = 'Previous Month']//following-sibling::span)[1]");
 
-    @FindBy(xpath = "//h4[text() = 'Round Trip']//ancestor::label")
-    WebElement roundTripBtn;
+    private By nextMonthBtn = By.xpath("//button[@aria-label = 'Next Month' and not (@style)]");
 
-    @FindBy(xpath = "//h4[text() = 'Multi City']//ancestor::label")
-    WebElement multiCityBtn;
+    private By travellerAndClass = By.xpath("//div[@aria-label='Travellers class inputbox']");
 
-    @FindBy(xpath = "//div[contains(@aria-label, 'Departure From')]")
-    WebElement departsFromField;
+    private By noOfAdults = By.xpath("//div[@id = 'traveller_container']//p[@aria-label = 'Adult']/following-sibling::div/ul/li");
+    private By noOfChildren = By.xpath("//div[@id = 'traveller_container']//p[@aria-label = 'Child']/following-sibling::div/ul/li");
+    private By noOfInfants = By.xpath("//div[@id = 'traveller_container']//p[@aria-label = 'Infant']/following-sibling::div/ul/li");
 
-    @FindBy(xpath = "//div[contains(@aria-label, 'Going To')]")
-    WebElement goingToField;
+    private By travelClass = By.xpath("//p[contains(text(),'Choose Travel Class')]/following-sibling::div/label");
 
-    //@FindBy(xpath = "//label[text()='Departure From']//parent::div[1]")
-    @FindBy(xpath = "//label[text()='Departure From']//parent::div[1]//input")
-    WebElement departureCity;
+    private By travelDetailsDone = By.xpath("//button[text()='Done']");
+    private By searchButton = By.xpath("//button[text()='Search']");
 
-    @FindBy(xpath = "//div[contains(@aria-label, 'Departure From')]//following-sibling::div//span")
-    List<WebElement> departureCityList;
+    private By regularFareType = By.xpath("//div[contains(@aria-label,'Regular')]");
+    private By studentFareType = By.xpath("//div[contains(@aria-label,'Student')]");
+    private By seniorCitizenFareType = By.xpath("//div[contains(@aria-label,'Senior Citizen')]");
+    private By armedForcesFareType = By.xpath("//div[contains(@aria-label,'Armed Forces')]");
 
-    //@FindBy(xpath = "//label[text()='Going To']//parent::div[1]")
-    @FindBy(xpath = "//label[text()='Going To']//parent::div[1]//input")
-    WebElement goToCity;
+    private By nonStopFlightsBtn = By.xpath("//span[text()='Non-Stop Flights']");
+    private By closePopup = By.xpath("//span[@class='style_cross__q1ZoV']/img");
 
-    @FindBy(xpath = "//div[contains(@aria-label, 'Going To')]//following-sibling::div//span")
-    List<WebElement> goToCityList;
+    private By addAnotherCity = By.xpath("//button[contains(text(),'Add Another City')]");
+    private By multiCityDeparture = By.xpath("//div[contains(@aria-label,'From')]");
+    private By multiCityArrival = By.xpath("//div[contains(@aria-label,'To')]");
+    private By removeCity = By.xpath("//button[text()='Remove']");
+    private By multiCityList = By.id("input-with-icon-adornment");
 
-    @FindBy(xpath = "//div[@aria-label='Departure Date inputbox']")
-    List<WebElement> departureDate;
+    // ================= RETURN LOCATORS =================
 
-    @FindBy(xpath = "//div[@aria-label = 'Return Date inputbox']")
-    WebElement returnDate;
 
-    //same for departure and return
-    @FindBy(xpath = "//div[@class='react-datepicker__month-container']/div//button[@aria-label = 'Previous Month']//following-sibling::span")
-    List<WebElement> monthNames;
-
-    //@FindBy(xpath = "(//div[@class='react-datepicker__month-container']/div//button[@aria-label = 'Previous Month']//following-sibling::span)[1]")
-    @FindBy(xpath = "(//button[@aria-label = 'Previous Month']//following-sibling::span)[1]")
-    WebElement currentMonthYear;
-
-    //same for departure and return
-    //Need to use the isVisible() method to identify the correct one
-    @FindBy(xpath = "//button[@aria-label = 'Next Month' and not (@style)]")
-    WebElement nextMonthBtn;
-
-    @FindBy(xpath = "//div[@aria-label='Travellers class inputbox']")
-    WebElement travellerAndClass;
-
-    @FindBy(xpath = "//div[@id = 'traveller_container']//p[@aria-label = 'Adult']/following-sibling::div/ul/li")
-    List<WebElement> noOfAdults;
-
-    @FindBy(xpath = "//div[@id = 'traveller_container']//p[@aria-label = 'Child']/following-sibling::div/ul/li")
-    List<WebElement> noOfChildren;
-
-    @FindBy(xpath = "//div[@id = 'traveller_container']//p[@aria-label = 'Infant']/following-sibling::div/ul/li")
-    List<WebElement> noOfInfants;
-
-    @FindBy(xpath = "//p[contains(text(),'Choose Travel Class')]/following-sibling::div/label")
-    List<WebElement> travelClass;
-
-    @FindBy(xpath = "//button[text()='Done']")
-    WebElement travelDetailsDone;
-
-    @FindBy(xpath = "//button[text()='Search']")
-    WebElement searchButton;
-
-    @FindBy(xpath = "//div[contains(@aria-label,'Regular')]")
-    WebElement regularFareType;
-
-    @FindBy(xpath = "//div[contains(@aria-label,'Student')]")
-    WebElement studentFareType;
-
-    @FindBy(xpath = "//div[contains(@aria-label,'Senior Citizen')]")
-    WebElement seniorCitizenFareType;
-
-    @FindBy(xpath = "//div[contains(@aria-label,'Armed Forces')]")
-    WebElement armedForcesFareType;
-
-    @FindBy(xpath = "//span[text()='Non-Stop Flights']")
-    WebElement nonStopFlightsBtn;
-
-    @FindBy(xpath = "//span[@class='style_cross__q1ZoV']/img")
-    WebElement closePopup;
-
-    @FindBy(xpath = "//button[contains(text(),'Add Another City')]")
-    WebElement addAnotherCity;
-
-    @FindBy(xpath = "//div[contains(@aria-label,'From')]")
-    List<WebElement> multiCityDeparture;
-
-    @FindBy(xpath = "//div[contains(@aria-label,'To')]")
-    List<WebElement> multiCityArrival;
-
-    @FindBy(xpath = "//button[text()='Remove']")
-    WebElement removeCity;
-
-    @FindBy(id = "input-with-icon-adornment")
-    WebElement multiCityList;
-
-    public WebElement getMultiCityList()
-    {
-        return multiCityList;
-    }
-
-    public WebElement getRemoveCity()
-    {
-        return removeCity;
-    }
-
-    public List<WebElement> getMultiCityArrival()
-    {
-        return multiCityArrival;
-    }
-
-    public List<WebElement> getMultiCityDeparture()
-    {
-        return multiCityDeparture;
-    }
-
-    public WebElement getAddAnotherCity()
-    {
-        return addAnotherCity;
-    }
-
-    public WebElement getClosePopup()
-    {
-        return closePopup;
-    }
-
-    public WebElement getStudentFareType()
-    {
-        return studentFareType;
-    }
-
-    public WebElement getSeniorCitizenFareType()
-    {
-        return seniorCitizenFareType;
-    }
-
-    public WebElement getArmedForcesFareType()
-    {
-        return armedForcesFareType;
-    }
-
-    public WebElement getCurrentMonthYear()
-    {
-        return currentMonthYear;
-    }
-
-    public WebElement getSearchButton()
-    {
-        return searchButton;
-    }
-
-    public WebElement getRegularFareType()
-    {
-        return regularFareType;
-    }
-
-    public WebElement getNonStopFlightsBtn()
-    {
-        return nonStopFlightsBtn;
-    }
-
-    public WebElement getFlightsTab()
+    public By getFlightsTab()
     {
         return flightsTab;
     }
 
-    public WebElement getHotelsTab()
+    public By getHotelsTab()
     {
         return hotelsTab;
     }
 
-    public WebElement getHolidaysTab()
+    public By getHolidaysTab()
     {
         return holidaysTab;
     }
 
-    public WebElement getBusTab()
+    public By getBusTab()
     {
         return busTab;
     }
 
-    public WebElement getTrainsTab()
+    public By getTrainsTab()
     {
         return trainsTab;
     }
 
-    public WebElement getCabsTab()
+    public By getCabsTab()
     {
         return cabsTab;
     }
 
-    public WebElement getOneWayBtn()
+    public By getOneWayBtn()
     {
         return oneWayBtn;
     }
 
-    public WebElement getRoundTripBtn()
+    public By getRoundTripBtn()
     {
         return roundTripBtn;
     }
 
-    public WebElement getMultiCityBtn()
+    public By getMultiCityBtn()
     {
         return multiCityBtn;
     }
 
-    public WebElement getDepartsFromField()
+    public By getDepartsFromField()
     {
         return departsFromField;
     }
 
-    public WebElement getGoingToField()
+    public By getGoingToField()
     {
         return goingToField;
     }
 
-    public WebElement getDepartureCity()
+    public By getDepartureCity()
     {
         return departureCity;
     }
 
-    public List<WebElement> getDepartureCityList()
+    public By getDepartureCityList()
     {
         return departureCityList;
     }
 
-    public WebElement getGoToCity()
+    public By getGoToCity()
     {
         return goToCity;
     }
 
-    public List<WebElement> getGoToCityList()
+    public By getGoToCityList()
     {
         return goToCityList;
     }
 
-    public List<WebElement> getDepartureDate()
+    public By getDepartureDate()
     {
         return departureDate;
     }
 
-    public WebElement getReturnDate()
+    public By getReturnDate()
     {
         return returnDate;
     }
 
-    public List<WebElement> getMonthNames()
+    public By getMonthNames()
     {
         return monthNames;
     }
 
-    public WebElement getNextMonthBtn()
+    public By getCurrentMonthYear()
+    {
+        return currentMonthYear;
+    }
+
+    public By getNextMonthBtn()
     {
         return nextMonthBtn;
     }
 
-    public WebElement getTravellerAndClass()
+    public By getTravellerAndClass()
     {
         return travellerAndClass;
     }
 
-    public List<WebElement> getNoOfAdults()
+    public By getNoOfAdults()
     {
         return noOfAdults;
     }
 
-    public List<WebElement> getNoOfChildren()
+    public By getNoOfChildren()
     {
         return noOfChildren;
     }
 
-    public List<WebElement> getNoOfInfants()
+    public By getNoOfInfants()
     {
         return noOfInfants;
     }
 
-    public List<WebElement> getTravelClass()
+    public By getTravelClass()
     {
         return travelClass;
     }
 
-    public WebElement getTravelDetailsDone()
+    public By getTravelDetailsDone()
     {
         return travelDetailsDone;
+    }
+
+    public By getSearchButton()
+    {
+        return searchButton;
+    }
+
+    public By getRegularFareType()
+    {
+        return regularFareType;
+    }
+
+    public By getStudentFareType()
+    {
+        return studentFareType;
+    }
+
+    public By getSeniorCitizenFareType()
+    {
+        return seniorCitizenFareType;
+    }
+
+    public By getArmedForcesFareType()
+    {
+        return armedForcesFareType;
+    }
+
+    public By getNonStopFlightsBtn()
+    {
+        return nonStopFlightsBtn;
+    }
+
+    public By getClosePopup()
+    {
+        return closePopup;
+    }
+
+    public By getAddAnotherCity()
+    {
+        return addAnotherCity;
+    }
+
+    public By getMultiCityDeparture()
+    {
+        return multiCityDeparture;
+    }
+
+    public By getMultiCityArrival()
+    {
+        return multiCityArrival;
+    }
+
+    public By getRemoveCity()
+    {
+        return removeCity;
+    }
+
+    public By getMultiCityList()
+    {
+        return multiCityList;
     }
 }

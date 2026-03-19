@@ -2,20 +2,21 @@ package StepDefinition.FlightSearch;
 
 import POJO.FlightSearch;
 import StepDefinition.LoginPage.LoginTextConstants;
-import Utilities.AttributeValue;
-import Utilities.BaseClass;
-import Utilities.DatePicker;
+import Utilities.*;
 import io.cucumber.java.PendingException;
 import io.cucumber.java.en.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
+import java.io.IOException;
 import java.util.List;
 
 public class FlightSearchStepDefinition extends BaseClass
 {
 
-    FlightSearch flight = new FlightSearch(getDriver());
+    FlightSearch flight = new FlightSearch();
     DatePicker dp = new DatePicker();
 
     @Given("the user is on the Yatra home page")
@@ -54,9 +55,9 @@ public class FlightSearchStepDefinition extends BaseClass
             clickElement(flight.getDepartsFromField());
             enterTextInField(flight.getDepartureCity(), city);
 
-            List<WebElement> ele = flight.getDepartureCityList();
+            List<WebElement> ele = getListOfElements(flight.getDepartureCityList());
 
-            for (int i = 0; i < flight.getDepartureCityList().size() - 1; ) {
+            for (int i = 0; i < ele.size() - 1; ) {
 
                 if (ele.get(i).getText().equalsIgnoreCase(city)) {
                     clickElement(ele.get(i));
@@ -69,8 +70,8 @@ public class FlightSearchStepDefinition extends BaseClass
             clickElement(flight.getGoingToField());
             enterTextInField(flight.getGoToCity(), city);
 
-            List<WebElement> ele = flight.getGoToCityList();
-            for (int i = 0; i < flight.getGoToCityList().size() - 1; ) {
+            List<WebElement> ele = getListOfElements(flight.getGoToCityList());
+            for (int i = 0; i < ele.size() - 1; ) {
 
                 if (ele.get(i).getText().equalsIgnoreCase(city)) {
                     clickElement(ele.get(i));
@@ -88,7 +89,7 @@ public class FlightSearchStepDefinition extends BaseClass
         //15-03-2026
 
         if (typeOfDate.equalsIgnoreCase("departureDate")) {
-            clickElement(flight.getDepartureDate().getFirst());
+            clickElement(getListOfElements(flight.getDepartureDate()).getFirst());
             dp.selectDate(date);
         } else if (typeOfDate.equalsIgnoreCase("returnDate")) {
             //clickElement(flight.getReturnDate());
@@ -100,23 +101,25 @@ public class FlightSearchStepDefinition extends BaseClass
     public void the_user_selects_adults_children_and_infants(String adults, String children, String infants) throws InterruptedException
     {
         //findTheElement("//div[@aria-label='Travellers class inputbox']").click();
-        clickElement(flight.getTravellerAndClass());
+        clickElement(WaitUtils.waitForClickable(flight.getTravellerAndClass()));
 
         if (Integer.parseInt(adults) <= 0)
             System.out.println("Select atleast one adult");
         else {
-            clickElement(flight.getNoOfAdults().get(Integer.parseInt(adults) + 1));
+            clickElement(getListOfElements(flight.getNoOfAdults()).get(Integer.parseInt(adults) + 1));
 
             if (Integer.parseInt(children) > 0) {
-                if (Integer.parseInt(children) <= (9 - Integer.parseInt(adults)))
-                    clickElement(flight.getNoOfChildren().get(Integer.parseInt(children)));
+                if (Integer.parseInt(children) <= (9 - Integer.parseInt(adults))) {
+                   // clickElment(WaitUtils.waitForClickable(By.xpath("")));
+                    clickElement(getListOfElements(flight.getNoOfChildren()).get(Integer.parseInt(children)));
+                }
                 else
                     System.out.println("Please select less number of children");
             }
 
             if (Integer.parseInt(infants) > 0) {
                 if (!(Integer.parseInt(infants) > Integer.parseInt(adults)))
-                    clickElement(flight.getNoOfInfants().get(Integer.parseInt(infants)));
+                    clickElement(getListOfElements(flight.getNoOfInfants()).get(Integer.parseInt(infants)));
                 else
                     System.out.println("Number of infants should be less than number of adults");
             }
@@ -174,22 +177,35 @@ public class FlightSearchStepDefinition extends BaseClass
     }
 
     @And("the user enters city pair {int} {string} to {string} with date {string}")
-    public void theUserEntersFirstCityPairToWithDate(int pairNo, String city1, String city2, String date)
+    public void theUserEntersFirstCityPairToWithDate(int pairNo, String fromCity, String toCity, String date) throws InterruptedException, IOException
     {
         String cityXPath = "";
 
-        //enter city1 and select it
-        clickElement(flight.getMultiCityDeparture().get(pairNo-1));
-        enterTextInField(flight.getMultiCityList(),city1);
-        cityXPath = "//li//span[text()='"+city1+"']";
-        clickElement(findTheElement(cityXPath));
+        List<CityList> list = TestDataLoader.getTravelDetails();
 
-        clickElement(flight.getMultiCityArrival().get(pairNo-1));
-        enterTextInField(flight.getMultiCityList(),city2);
-        cityXPath = "//li//span[text()='"+city2+"']";
-        clickElement(findTheElement(cityXPath));
+        clickElement(getListOfElements(flight.getMultiCityDeparture()).get(pairNo-1));
+        enterTextInField(flight.getMultiCityList(),list.get(pairNo).getFrom_city());
+        cityXPath = "//li//span[text()='"+list.get(pairNo).getFrom_city()+"']";
+        clickElement(WaitUtils.waitForClickable(By.xpath(cityXPath)));
 
-        clickElement(flight.getDepartureDate().get(pairNo-1));
+
+//        clickElement(getListOfElements(flight.getMultiCityDeparture()).get(pairNo-1));
+//        enterTextInField(flight.getMultiCityList(),fromCity);
+//        cityXPath = "//li//span[text()='"+fromCity+"']";
+//        clickElement(WaitUtils.waitForClickable(By.xpath(cityXPath)));
+
+
+        clickElement(getListOfElements(flight.getMultiCityArrival()).get(pairNo-1));
+        enterTextInField(flight.getMultiCityList(),list.get(pairNo).getTo_city());
+        cityXPath = "//li//span[text()='"+list.get(pairNo).getTo_city()+"']";
+        clickElement(WaitUtils.waitForClickable(By.xpath(cityXPath)));
+
+//        clickElement(getListOfElements(flight.getMultiCityArrival()).get(pairNo-1));
+//        enterTextInField(flight.getMultiCityList(),toCity);
+//        cityXPath = "//li//span[text()='"+toCity+"']";
+//        clickElement(WaitUtils.waitForClickable(By.xpath(cityXPath)));
+
+        clickElement(getListOfElements(flight.getDepartureDate()).get(pairNo-1));
         dp.selectDate(date);
 
     }
@@ -197,7 +213,7 @@ public class FlightSearchStepDefinition extends BaseClass
     @And("the user selects {string}")
     public void theUserSelects(String travelClass)
     {
-        for (WebElement ele : flight.getTravelClass()) {
+        for (WebElement ele : getListOfElements(flight.getTravelClass())){
             if(getAttributeValue(ele, AttributeValue.ARIA_LABEL).equalsIgnoreCase(travelClass)) {
                 clickElement(ele);
                 //clickElement(getDriver().findElement(By.xpath()));
@@ -206,4 +222,37 @@ public class FlightSearchStepDefinition extends BaseClass
         }
         //clickElement(flight.getTravelDetailsDone());
     }
+
+
+    @And("the user enters city pair {string}")
+    public void theUserEntersCityPairWithDate(String blockID) throws IOException
+    {
+        String cityXPath = "";
+        int pairNo = Integer.parseInt(blockID);
+
+        List<CityList> list = TestDataLoader.getTravelDetails();
+
+        for(CityList li : list)
+        {
+            if(li.getId().equalsIgnoreCase(blockID))
+            {
+                clickElement(getListOfElements(flight.getMultiCityDeparture()).get(pairNo-1));
+                enterTextInField(flight.getMultiCityList(),li.getFrom_city());
+                cityXPath = "//li//span[text()='"+li.getFrom_city()+"']";
+                clickElement(WaitUtils.waitForClickable(By.xpath(cityXPath)));
+
+
+                clickElement(getListOfElements(flight.getMultiCityArrival()).get(pairNo-1));
+                enterTextInField(flight.getMultiCityList(),li.getTo_city());
+                cityXPath = "//li//span[text()='"+li.getTo_city()+"']";
+                clickElement(WaitUtils.waitForClickable(By.xpath(cityXPath)));
+
+                clickElement(getListOfElements(flight.getDepartureDate()).get(pairNo-1));
+                dp.selectDate(li.getDeparture_date());
+                break;
+            }
+        }
+
+    }
+
 }

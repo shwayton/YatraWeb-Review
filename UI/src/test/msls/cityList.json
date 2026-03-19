@@ -1,0 +1,22 @@
+{
+  "tests": [
+    {
+      "id": 1,
+      "from_city": "Milan",
+      "to_city": "New Delhi",
+      "departure_date": "06-06-2026"
+    },
+    {
+      "id": 2,
+      "from_city": "New Delhi",
+      "to_city": "Coimbatore",
+      "departure_date": "08-06-2026"
+    },
+    {
+      "id": 3,
+      "from_city": "Tokyo",
+      "to_city": "Barcelona",
+      "departure_date": "11-06-2026"
+    }
+  ]
+}
