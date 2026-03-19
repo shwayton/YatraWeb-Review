@@ -40,16 +40,17 @@ Feature: Search for a flight with required details
   Scenario Outline: User searches multi-city flight successfully
     Given the user is on the Yatra home page
     When the user selects journey type as "multi-city"
-    And the user enters city pair 1 "<fromCity1>" to "<toCity1>" with date "<date1>"
-    And the user enters city pair 2 "<fromCity2>" to "<toCity2>" with date "<date2>"
+#    And the user enters city pair 1 "<fromCity1>" to "<toCity1>" with date "<date1>"
+    And the user enters city pair "1"
+    And the user enters city pair "2"
     And the user selects "<adults>" adults, "<children>" children and "<infants>" infants
     And the user selects "<travelClass>"
 #    And the user clicks on Search Flights
 #    Then the user should see the list of available "multi-city" flights
 
     Examples:
-      | fromCity1 | toCity1 | date1      | fromCity2 | toCity2   | date2      | adults | children | infants | travelClass     |
-      | Miami     | Toronto | 01-06-2026 | Mumbai    | Hyderabad | 05-06-2026 | 2      | 1        | 0       | premium economy |
+      | adults | children | infants | travelClass     |
+      | 2      | 1        | 0       | premium economy |
 
   Scenario Outline: User searches flight with more infants than adults
     Given the user is on the Yatra home page

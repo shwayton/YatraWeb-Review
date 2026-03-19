@@ -3,6 +3,7 @@ package StepDefinition.LoginPage;
 import POJO.Login;
 import Utilities.AttributeValue;
 import Utilities.BaseClass;
+import Utilities.WaitUtils;
 import io.cucumber.java.en.*;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class LoginStepDefinition extends BaseClass
 {
-    Login login = new Login(getDriver());
+    Login login = new Login();
 
 //    @Given("the user is on the Yatra home page")
 //    public void the_user_is_on_the_yatra_website()
@@ -106,6 +107,7 @@ public class LoginStepDefinition extends BaseClass
     @When("the user lands on Sign Up page")
     public void the_user_lands_on_sign_up_page()
     {
+        WaitUtils.waitForVisible(login.getSignUpHeader());
         Assert.assertEquals(getRequiredText(login.getSignUpHeader()).trim(), LoginTextConstants.SIGNUP_HEADER);
     }
 
@@ -119,10 +121,10 @@ public class LoginStepDefinition extends BaseClass
             clickElement(login.getCountryCodeField());
             enterTextInField(login.getCountryListSearchField(), countryCode.substring(1));
 
-            if (login.getCountryList().getFirst().getText().trim().equalsIgnoreCase(LoginTextConstants.NO_MATCH_FOUND))
+            if (getListOfElements(login.getCountryList()).getFirst().getText().trim().equalsIgnoreCase(LoginTextConstants.NO_MATCH_FOUND))
                 System.out.println("Incorrect country code");
             else {
-                for (WebElement ele : login.getCountryList()) {
+                for (WebElement ele : getListOfElements(login.getCountryList())) {
                     if (ele.getText().split("\\R")[1].equalsIgnoreCase(countryCode)) {
                         clickElement(ele);
                         break;
@@ -135,7 +137,7 @@ public class LoginStepDefinition extends BaseClass
 
             clickElement(login.getSignUpPronoun());
 
-            List<WebElement> pronounList = login.getPronounList();
+            List<WebElement> pronounList = getListOfElements(login.getPronounList());
             for (WebElement ele : pronounList) {
                 if (str[0].equalsIgnoreCase(ele.getText())) {
                     clickElement(ele);
@@ -214,10 +216,10 @@ public class LoginStepDefinition extends BaseClass
         clickElement(login.getCountryCodeField());
         enterTextInField(login.getCountryListSearchField(), countryCode.substring(1));
 
-        if (login.getCountryList().getFirst().getText().trim().equalsIgnoreCase(LoginTextConstants.NO_MATCH_FOUND))
+        if (getListOfElements(login.getCountryList()).getFirst().getText().trim().equalsIgnoreCase(LoginTextConstants.NO_MATCH_FOUND))
             System.out.println("Incorrect country code");
         else {
-            for (WebElement ele : login.getCountryList()) {
+            for (WebElement ele : getListOfElements(login.getCountryList())) {
                 if (ele.getText().split("\\R")[1].equalsIgnoreCase(countryCode)) {
                     clickElement(ele);
                     break;

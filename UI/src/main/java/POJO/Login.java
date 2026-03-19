@@ -1,300 +1,223 @@
 package POJO;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-
-import java.util.List;
+import org.openqa.selenium.By;
 
 public class Login
 {
-    private WebDriver driver;
 
-    public Login(WebDriver driver)
-    {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
-    }
-
-    @FindBy(xpath = "//section//p[contains(text(),'Login or')]")
-    WebElement loginDialogBoxTextElement;
-
-    @FindBy(xpath = "//input[@placeholder ='Email Id / Mobile Number']")
-    WebElement loginEmailID;
-
-    @FindBy(xpath = "//*[@id = 'google-login-btn']")
-    WebElement googleLoginBtn;
-
-    @FindBy(xpath = "//*[text()='SME Account']")
-    WebElement SME_Account;
-
-    @FindBy(xpath = "//*[text()='Personal Account']")
-    WebElement Personal_Account;
-
-    @FindBy(xpath = "//button[text()='Login ']")
-    WebElement LoginBtn;
-
-    @FindBy(xpath = "//button[text() = 'Login']")
-    WebElement LoginBtnAfterPassword;
-
-    @FindBy(xpath = "//button[text()='Verify']")
-    WebElement verifyBtn;
-
-    @FindBy(id = "otp")
-    WebElement otpField;
-
-    @FindBy(xpath = "//div[@class='style_popup__a7PrI MuiBox-root css-0']")
-    WebElement loginBox;
-
-    @FindBy(id = "pass")
-    WebElement passwordField;
-
-    @FindBy(xpath = "//div[contains(text(),'Login / Signup')]")
-    WebElement Login_SignUpBtn;
-
-    @FindBy(xpath = "//*[@id='__next']//*[contains(text(),'Hi')]")
-    WebElement HiText;
-
-    @FindBy(xpath = "//div[contains(text(),'Login using OTP')]")
-    WebElement loginUsingOTP;
-
-    @FindBy(xpath = "//p[contains(text(),'Sign Up')]")
-    WebElement signUpHeader;
-
-    @FindBy(id = "password")
-    WebElement signUpPass;
-
-    @FindBy(name = "email")
-    WebElement signUpEmail;
-
-    @FindBy(id = "mobile")
-    WebElement signUpPhoneNo;
-
-    @FindBy(name = "name")
-    WebElement signUpName;
-
-    @FindBy(xpath = "//span[@class='flag' and text()='Mr.']")
-    WebElement signUpPronoun;
-
-    @FindBy(xpath = "//span[@class='flag' and text()='Mr.']/following-sibling::ul/li")
-    List<WebElement> pronounList;
-
-    @FindBy(id = "whtps")
-    WebElement whatsappCheckBox;
-
-    @FindBy(xpath = "//span[contains(text(),'Keep me updated on special promotions and offers')]/preceding-sibling::span")
-    WebElement promotionCheckBox;
-
-    @FindBy(xpath = "//span[@class='flag' and text()='+91']")
-    WebElement countryCodeField;
-
-    @FindBy(xpath = "//span[@class='flag' and text()='+91']/following-sibling::ul/li[1]/input")
-    WebElement countryListSearchField;
-
-    @FindBy(xpath = "//span[@class='flag' and text()='+91']/following-sibling::ul/li[1]/following-sibling::li")
-    List<WebElement> countryList;
-
-    @FindBy(xpath = "//button[@type='submit']")
-    WebElement signUpBtn;
-
-    @FindBy(id = "gst")
-    WebElement gst;
-
-    @FindBy(id = "company")
-    WebElement companyName;
-
-    @FindBy(id = "address")
-    WebElement companyAddress;
-
-    @FindBy(id = "pincode")
-    WebElement pincode;
-
-    @FindBy(name = "city")
-    WebElement city;
-
-    @FindBy(name = "state")
-    WebElement state;
-
-    @FindBy(id = "mobile-number")
-    WebElement loginPhoneNo;
-
-    @FindBy(xpath = "//span[@class='style_cross__q1ZoV']/img")
-    WebElement closePopup;
-
-    public WebElement getClosePopup()
-    {
-        return closePopup;
-    }
-
-    public WebElement getLoginPhoneNo()
-    {
-        return loginPhoneNo;
-    }
-
-    public WebElement getGst()
-    {
-        return gst;
-    }
-
-    public WebElement getCompanyName()
-    {
-        return companyName;
-    }
-
-    public WebElement getCompanyAddress()
-    {
-        return companyAddress;
-    }
-
-    public WebElement getPincode()
-    {
-        return pincode;
-    }
-
-    public WebElement getCity()
-    {
-        return city;
-    }
-
-    public WebElement getState()
-    {
-        return state;
-    }
-
-    public WebElement getSignUpBtn()
-    {
-        return signUpBtn;
-    }
-
-    public WebElement getCountryCodeField()
-    {
-        return countryCodeField;
-    }
-
-    public WebElement getCountryListSearchField()
-    {
-        return countryListSearchField;
-    }
-
-    public List<WebElement> getCountryList()
-    {
-        return countryList;
-    }
-
-    public WebElement getWhatsappCheckBox()
-    {
-        return whatsappCheckBox;
-    }
-
-    public WebElement getPromotionCheckBox()
-    {
-        return promotionCheckBox;
-    }
-
-    public WebElement getSignUpPronoun()
-    {
-        return signUpPronoun;
-    }
-
-    public List<WebElement> getPronounList()
-    {
-        return pronounList;
-    }
-
-    public WebElement getSignUpName()
-    {
-        return signUpName;
-    }
-
-    public WebElement getSignUpPhoneNo()
-    {
-        return signUpPhoneNo;
-    }
-
-    public WebElement getSignUpEmail()
-    {
-        return signUpEmail;
-    }
-
-    public WebElement getSignUpPass()
-    {
-        return signUpPass;
-    }
-
-    public WebElement getSignUpHeader()
-    {
-        return signUpHeader;
-    }
-
-    public WebElement getLoginUsingOTP()
-    {
-        return loginUsingOTP;
-    }
-
-    public WebElement getHiText()
-    {
-        return HiText;
-    }
-
-    public WebElement getLoginBtnAfterPassword()
-    {
-        return LoginBtnAfterPassword;
-    }
-
-    public WebElement getLogin_SignUpBtn()
-    {
-        return Login_SignUpBtn;
-    }
-
-    public WebElement getPasswordField()
-    {
-        return passwordField;
-    }
-
-    public WebElement getLoginBox()
-    {
-        return loginBox;
-    }
-
-    public WebElement getOtpField()
-    {
-        return otpField;
-    }
-
-    public WebElement getVerifyBtn()
-    {
-        return verifyBtn;
-    }
-
-    public WebElement getLoginBtn()
-    {
-        return LoginBtn;
-    }
-
-    public WebElement getPersonal_Account()
-    {
-        return Personal_Account;
-    }
-
-    public WebElement getSME_Account()
-    {
-        return SME_Account;
-    }
-
-    public WebElement getGoogleLoginBtn()
-    {
-        return googleLoginBtn;
-    }
-
-    public WebElement getLoginEmailID()
-    {
-        return loginEmailID;
-    }
-
-    public WebElement getLoginDialogBoxTextElement()
+    // ================= LOCATORS =================
+
+    private final By loginDialogBoxTextElement = By.xpath("//section//p[contains(text(),'Login or')]");
+    private final By loginEmailID = By.xpath("//input[@placeholder ='Email Id / Mobile Number']");
+    private final By googleLoginBtn = By.xpath("//*[@id = 'google-login-btn']");
+    private final By SME_Account = By.xpath("//*[text()='SME Account']");
+    private final By Personal_Account = By.xpath("//*[text()='Personal Account']");
+    private final By LoginBtn = By.xpath("//button[text()='Login ']");
+    private final By LoginBtnAfterPassword = By.xpath("//button[text() = 'Login']");
+    private final By verifyBtn = By.xpath("//button[text()='Verify']");
+    private final By otpField = By.id("otp");
+    private final By loginBox = By.xpath("//div[@class='style_popup__a7PrI MuiBox-root css-0']");
+    private final By passwordField = By.id("pass");
+    private final By Login_SignUpBtn = By.xpath("//div[contains(text(),'Login / Signup')]");
+    private final By HiText = By.xpath("//*[@id='__next']//*[contains(text(),'Hi')]");
+    private final By loginUsingOTP = By.xpath("//div[contains(text(),'Login using OTP')]");
+    private final By signUpHeader = By.xpath("//p[contains(text(),'Sign Up')]");
+    private final By signUpPass = By.id("password");
+    private final By signUpEmail = By.name("email");
+    private final By signUpPhoneNo = By.id("mobile");
+    private final By signUpName = By.name("name");
+    private final By signUpPronoun = By.xpath("//span[@class='flag' and text()='Mr.']");
+    private final By pronounList = By.xpath("//span[@class='flag' and text()='Mr.']/following-sibling::ul/li");
+    private final By whatsappCheckBox = By.id("whtps");
+    private final By promotionCheckBox = By.xpath("//span[contains(text(),'Keep me updated on special promotions and offers')]/preceding-sibling::span");
+    private final By countryCodeField = By.xpath("//span[@class='flag' and text()='+91']");
+    private final By countryListSearchField = By.xpath("//span[@class='flag' and text()='+91']/following-sibling::ul/li[1]/input");
+    private final By countryList = By.xpath("//span[@class='flag' and text()='+91']/following-sibling::ul/li[1]/following-sibling::li");
+    private final By signUpBtn = By.xpath("//button[@type='submit']");
+    private final By gst = By.id("gst");
+    private final By companyName = By.id("company");
+    private final By companyAddress = By.id("address");
+    private final By pincode = By.id("pincode");
+    private final By city = By.name("city");
+    private final By state = By.name("state");
+    private final By loginPhoneNo = By.id("mobile-number");
+    private final By closePopup = By.xpath("//span[@class='style_cross__q1ZoV']/img");
+
+    // ================= RETURN LOCATORS =================
+
+
+    public By getLoginDialogBoxTextElement()
     {
         return loginDialogBoxTextElement;
     }
 
+    public By getLoginEmailID()
+    {
+        return loginEmailID;
+    }
+
+    public By getGoogleLoginBtn()
+    {
+        return googleLoginBtn;
+    }
+
+    public By getSME_Account()
+    {
+        return SME_Account;
+    }
+
+    public By getPersonal_Account()
+    {
+        return Personal_Account;
+    }
+
+    public By getLoginBtn()
+    {
+        return LoginBtn;
+    }
+
+    public By getLoginBtnAfterPassword()
+    {
+        return LoginBtnAfterPassword;
+    }
+
+    public By getVerifyBtn()
+    {
+        return verifyBtn;
+    }
+
+    public By getOtpField()
+    {
+        return otpField;
+    }
+
+    public By getLoginBox()
+    {
+        return loginBox;
+    }
+
+    public By getPasswordField()
+    {
+        return passwordField;
+    }
+
+    public By getLogin_SignUpBtn()
+    {
+        return Login_SignUpBtn;
+    }
+
+    public By getHiText()
+    {
+        return HiText;
+    }
+
+    public By getLoginUsingOTP()
+    {
+        return loginUsingOTP;
+    }
+
+    public By getSignUpHeader()
+    {
+        return signUpHeader;
+    }
+
+    public By getSignUpPass()
+    {
+        return signUpPass;
+    }
+
+    public By getSignUpEmail()
+    {
+        return signUpEmail;
+    }
+
+    public By getSignUpPhoneNo()
+    {
+        return signUpPhoneNo;
+    }
+
+    public By getSignUpName()
+    {
+        return signUpName;
+    }
+
+    public By getSignUpPronoun()
+    {
+        return signUpPronoun;
+    }
+
+    public By getPronounList()
+    {
+        return pronounList;
+    }
+
+    public By getWhatsappCheckBox()
+    {
+        return whatsappCheckBox;
+    }
+
+    public By getPromotionCheckBox()
+    {
+        return promotionCheckBox;
+    }
+
+    public By getCountryCodeField()
+    {
+        return countryCodeField;
+    }
+
+    public By getCountryListSearchField()
+    {
+        return countryListSearchField;
+    }
+
+    public By getCountryList()
+    {
+        return countryList;
+    }
+
+    public By getSignUpBtn()
+    {
+        return signUpBtn;
+    }
+
+    public By getGst()
+    {
+        return gst;
+    }
+
+    public By getCompanyName()
+    {
+        return companyName;
+    }
+
+    public By getCompanyAddress()
+    {
+        return companyAddress;
+    }
+
+    public By getPincode()
+    {
+        return pincode;
+    }
+
+    public By getCity()
+    {
+        return city;
+    }
+
+    public By getState()
+    {
+        return state;
+    }
+
+    public By getLoginPhoneNo()
+    {
+        return loginPhoneNo;
+    }
+
+    public By getClosePopup()
+    {
+        return closePopup;
+    }
 }
