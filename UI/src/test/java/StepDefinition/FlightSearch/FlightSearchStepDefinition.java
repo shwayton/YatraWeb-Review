@@ -125,8 +125,6 @@ public class FlightSearchStepDefinition extends BaseClass
             }
         }
 
-        Thread.sleep(5000);
-
     }
 
     @When("the user selects fare type {string}")
@@ -234,6 +232,7 @@ public class FlightSearchStepDefinition extends BaseClass
                 clickElement(WaitUtils.waitForClickable(By.xpath(cityXPath)));
 
                 clickElement(getListOfElements(flight.getDepartureDate()).get(pairNo-1));
+
                 dp.selectDate(li.getDeparture_date());
                 break;
             }
