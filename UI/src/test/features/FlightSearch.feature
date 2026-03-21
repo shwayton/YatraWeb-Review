@@ -55,27 +55,27 @@ Feature: Search for a flight with required details
   Scenario Outline: User searches flight with more infants than adults
     Given the user is on the Yatra home page
     When the user selects journey type as "one-way"
-    And the user enters "Delhi" as source city
-    And the user enters "Mumbai" as destination city
+    And the user enters "<fromCity>" as "fromCity"
+    And the user enters "<destination_city>" as "destination_city"
     And the user selects "departureDate" "<departureDate>"
     And the user selects "1" adults, "0" children and "2" infants
     And the user clicks on Search Flights
     Then the user should see an error message stating "Number of infants cannot exceed number of adults"
 
     Examples:
-      | departureDate |
-      | 20-03-2026    |
+      | departureDate | fromCity | destination_city |
+      | 20-03-2026    |Delhi     |Mumbai            |
 
   Scenario Outline: User searches round-trip flight with invalid return date
     Given the user is on the Yatra home page
     When the user selects journey type as "round-trip"
-    And the user enters "Delhi" as source city
-    And the user enters "Bangalore" as destination city
+    And the user enters "<fromCity>" as "fromCity"
+    And the user enters "<destination_city>" as "destination_city"
     And the user selects "departureDate" "<departureDate>"
     And the user selects "returnDate" "<returnDate>"
     And the user clicks on Search Flights
     Then the user should see an error message stating "Return date must be after departure date"
 
     Examples:
-      | departureDate | returnDate |
-      | 20-04-2026    | 15-04-2026 |
+      | departureDate | returnDate | fromCity | destination_city |
+      | 20-04-2026    | 15-04-2026 | Delhi    | Mumbai           |
